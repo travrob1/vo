@@ -1,7 +1,7 @@
 /*global angular*/
 
 angular.module('app')
-.controller('registerCtrl',function($scope, $state,  AuthService, $location, state, FirepolUser){
+.controller('registerCtrl',function($scope, $state,  AuthService, $location, state){
     $scope.register = function(){
         AuthService.register($scope.user.email, $scope.user.password, $scope.user.username)
             .then(function(res){
@@ -27,15 +27,15 @@ angular.module('app')
     };
 
     $scope.addUserName = function () {
-        return FirepolUser.prototype$updateAttributes(
-            { id: $scope.$root.authenticatedUser.id }, {username: $scope.update.username}
-        ).$promise
-        .then(function () {
-            if(state.ui.comeBackUrl){
-                $location.path(state.ui.comeBackUrl);
-            } else {
-                $state.transitionTo('user-profile');
-            }
-        });
+        // return FirepolUser.prototype$updateAttributes(
+        //     { id: $scope.$root.authenticatedUser.id }, {username: $scope.update.username}
+        // ).$promise
+        // .then(function () {
+        //     if(state.ui.comeBackUrl){
+        //         $location.path(state.ui.comeBackUrl);
+        //     } else {
+        //         $state.transitionTo('user-profile');
+        //     }
+        // });
     };
 });

@@ -280,12 +280,6 @@ angular.module('app').factory('AuthService', function($rootScope, $http, $q, $lo
         getCurrent: getCurrent
     };
 });
-/*global angular*/
-
-angular.module('app')
-.controller('marketingCtrl',function($scope){
-   
-});
 'use strict';
 //NOTE: This controller is only ever use for social logins.  Local longins are managed inside the register.controller.js
 
@@ -311,43 +305,8 @@ angular.module('app')
 /*global angular*/
 
 angular.module('app')
-.controller('registerCtrl',function($scope, $state,  AuthService, $location, state, FirepolUser){
-    $scope.register = function(){
-        AuthService.register($scope.user.email, $scope.user.password, $scope.user.username)
-            .then(function(res){
-                return AuthService.login($scope.user.email.toLowerCase(), $scope.user.password);
-            })
-            .then(function(){
-                if(state.ui.comeBackUrl){
-                    $location.path(state.ui.comeBackUrl);
-                }else {
-                    state.ui.firstTimeLoggedIn = true;
-                    $location.path('/user-profile');
-                }
-            })
-            .catch(function(err){
-                var message = err.data.error.message;
-                if(message.indexOf('Must provide a valid email') > -1){
-                    $scope.registerError = 'Must provide a valid email';
-                }
-                if(message.indexOf('Email already exists') > -1){
-                    $scope.registerError = 'Email already exists';
-                }
-            });
-    };
-
-    $scope.addUserName = function () {
-        return FirepolUser.prototype$updateAttributes(
-            { id: $scope.$root.authenticatedUser.id }, {username: $scope.update.username}
-        ).$promise
-        .then(function () {
-            if(state.ui.comeBackUrl){
-                $location.path(state.ui.comeBackUrl);
-            } else {
-                $state.transitionTo('user-profile');
-            }
-        });
-    };
+.controller('marketingCtrl',function($scope){
+   
 });
 'use strict';
 /*global angular, document */
@@ -697,6 +656,47 @@ function timeToWords() {
             return ret;
         } 
 }
+/*global angular*/
+
+angular.module('app')
+.controller('registerCtrl',function($scope, $state,  AuthService, $location, state){
+    $scope.register = function(){
+        AuthService.register($scope.user.email, $scope.user.password, $scope.user.username)
+            .then(function(res){
+                return AuthService.login($scope.user.email.toLowerCase(), $scope.user.password);
+            })
+            .then(function(){
+                if(state.ui.comeBackUrl){
+                    $location.path(state.ui.comeBackUrl);
+                }else {
+                    state.ui.firstTimeLoggedIn = true;
+                    $location.path('/user-profile');
+                }
+            })
+            .catch(function(err){
+                var message = err.data.error.message;
+                if(message.indexOf('Must provide a valid email') > -1){
+                    $scope.registerError = 'Must provide a valid email';
+                }
+                if(message.indexOf('Email already exists') > -1){
+                    $scope.registerError = 'Email already exists';
+                }
+            });
+    };
+
+    $scope.addUserName = function () {
+        // return FirepolUser.prototype$updateAttributes(
+        //     { id: $scope.$root.authenticatedUser.id }, {username: $scope.update.username}
+        // ).$promise
+        // .then(function () {
+        //     if(state.ui.comeBackUrl){
+        //         $location.path(state.ui.comeBackUrl);
+        //     } else {
+        //         $state.transitionTo('user-profile');
+        //     }
+        // });
+    };
+});
 'use strict';
 /*global angular */
 angular.module('app')
