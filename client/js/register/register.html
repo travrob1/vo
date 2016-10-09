@@ -24,17 +24,17 @@
                 
             </div>
         </div>
-        <form ng-submit="register()"> 
+        <form action="/register" method="post"> 
             <div class="row form-group">
                 <div class="col-xs-12 col-sm-8 col-sm-offset-2">
                     <label>Email</label>
-                    <input type="text" class="form-control" required="required" ng-model="user.email">
+                    <input type="text" class="form-control" required="required" ng-model="user.email" name="email">
                     
                     <label>Username/Displayname</label>
-                    <input type="text" class="form-control" required="required" ng-model="user.username">
+                    <input type="text" class="form-control" required="required" ng-model="user.username" name="username">
                     
                     <label>Password</label>
-                    <input type="password" class="form-control" required="required" ng-model="user.password">
+                    <input type="password" class="form-control" required="required" ng-model="user.password" name="password">
                     
 
                     <br>

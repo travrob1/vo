@@ -40,14 +40,14 @@ module.exports = function(app, passport) {
 
 		// SIGNUP =================================
 		// show the signup form
-		app.get('/signup', function(req, res) {
+		app.get('/register', function(req, res) {
 			res.render('signup.ejs', { message: req.flash('loginMessage') });
 		});
 
 		// process the signup form
-		app.post('/signup', passport.authenticate('local-signup', {
-			successRedirect : '/profile', // redirect to the secure profile section
-			failureRedirect : '/signup', // redirect back to the signup page if there is an error
+		app.post('/register', passport.authenticate('local-signup', {
+			successRedirect : '#/user-profile', // redirect to the secure profile section
+			failureRedirect : '#/register', // redirect back to the signup page if there is an error
 			failureFlash : true // allow flash messages
 		}));
 
@@ -59,7 +59,7 @@ module.exports = function(app, passport) {
 		// handle the callback after facebook has authenticated the user
 		app.get('/auth/facebook/callback',
 			passport.authenticate('facebook', {
-				successRedirect : '/profile',
+				successRedirect : '#/user-profile',
 				failureRedirect : '/'
 			}));
 
