@@ -1,0 +1,33 @@
+<header class="navbar-fixed-top ">
+<nav class="navbar navbar-default">
+  <div class="container">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+            <a id="logo" class="pull-left" href="#/"></a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      
+      <ul class="nav navbar-nav navbar-right" ng-click='mobileCollapseNav()'>
+        <li ng-hide="!authenticatedUser"><a href="#/ask-question">Ask Questions</a></li>
+        <li><a href="#/questions">Questions</a></li>
+        <li ng-hide="!authenticatedUser"><a href="#/user-profile">Profile</a></li>
+        <li ng-hide="!authenticatedUser"><a href="#/account">Account</a></li>
+        
+        <li ng-hide="!authenticatedUser"><a style="cursor: pointer;" ng-click="logout()">Logout</a></li>
+        <li ng-hide="authenticatedUser"><a href="#/register">Register</a></li>
+        <li class="login" ng-hide="authenticatedUser">
+            <a style="cursor: pointer;" data-toggle="modal" data-target="#loginForm" ><i class="fa fa-lock"></i>&nbsp;Login</a>
+        </li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+</header>

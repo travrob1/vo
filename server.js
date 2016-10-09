@@ -9,7 +9,15 @@ var mongoose = require('mongoose');
 var passport = require('passport');
 var flash    = require('connect-flash');
 
+var path = require('path');
+var favicon = require('serve-favicon');
+var logger = require('morgan');
+var session = require('cookie-session');
+
+
 var configDB = require('./config/database.js');
+
+
 
 // configuration ===============================================================
 mongoose.connect(configDB.url); // connect to our database
@@ -30,6 +38,9 @@ app.configure(function() {
 	app.use(passport.initialize());
 	app.use(passport.session()); // persistent login sessions
 	app.use(flash()); // use connect-flash for flash messages stored in session
+	app.use(express.static(path.join(__dirname, '/client')));
+	app.use(express.static(path.join(__dirname, '/bower_components')));
+	app.use(express.static(path.join(__dirname, '/.build')));
 
 });
 

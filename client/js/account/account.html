@@ -1,0 +1,52 @@
+<section class="title">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <h1>Account</h1>
+            </div>
+            
+        </div>
+    </div>
+</section>
+
+<div class="container">
+    <section id="registration-page" >
+        <div class="row form-group">
+            <form ng-submit="updateAccount()"> 
+                
+                    <div class="col-xs-12 col-sm-5">
+                        <label>Display name</label>
+                        <div>Identifies you to the general public.  It can be a handle or nickname.</div>
+                        <input type="text" class="form-control" ng-model="user.name">
+                        <label for="email">Email</label>
+                        <div>This is not shared publicly.</div>
+                        <input type="text" class="form-control" required="required" ng-model="user.email">
+                        <br>
+                        
+                        <button type="submit" class="btn btn-primary btn-large pull-right">Update</button>
+
+                    </div>
+            </form>
+
+            <form ng-submit="updatePassword()"> 
+                    <div class="col-xs-12 col-sm-5  col-sm-offset-1">
+                        <label>Existing Password</label>
+                        <input type="text" class="form-control" required="required" ng-model="userPasswords.oldPassword">
+                        <label>New Password</label>
+                        <input type="text" class="form-control" required="required" ng-model="userPasswords.newPassword">
+                        <label for="email">Confirm Password</label>
+                        <input type="text" class="form-control" required="required" ng-model="confirmPassword">
+                        <br>
+                        
+                        <button type="submit" class="btn btn-primary btn-large pull-right">Update</button>
+
+                    </div>
+            </form>
+        </div>
+
+
+        
+    </section>    
+</div>
+
+<!-- /#registration-page -->

@@ -1,0 +1,30 @@
+    <section class="title">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <h1>Questions</h1>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+    <!-- / .title -->       
+    <div class="container">
+        <section id="question-list">
+            <ul class="faq">
+                 <li ng-repeat="post in postsList.slice().reverse()">
+                    <div a ui-sref="question({ id: post.id, })">
+                        <span class="number">{{$index}}</span>
+                        <div>
+                            <h3>{{post.title}}</h3>
+                            <!-- <p>{{post.details | limitTo: 400 }}</p> -->
+                        </div>
+                     <div>
+                </li>
+            </ul>
+            <p>&nbsp;</p>
+            
+        </section>
+
+    </div>
+    
