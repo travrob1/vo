@@ -2,7 +2,7 @@
 
 /*global angular, $, _ */
 
-angular.module('app').factory('AuthService', function($rootScope, $http, $q, $location) {
+angular.module('app').factory('AuthService', function($rootScope, $http, $q, $location, config) {
     function race(promises) {
       var deferred = $q.defer();
 
@@ -64,6 +64,15 @@ angular.module('app').factory('AuthService', function($rootScope, $http, $q, $lo
     }
 
     function getCurrent() {
+        return $q (function(resolve, reject){
+            if(config.user){
+                $rootScope.authenticatedUser = config.user;
+                return resolve();
+            }else {
+                return reject();
+            }
+        });
+        
         // if (configuration.bootstrapLogin) {
         //     return $http.get('auth/getCurrent')
         //     .then(function (res) {

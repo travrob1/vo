@@ -39,14 +39,85 @@
                         <br>
                         
                         <button type="submit" class="btn btn-primary btn-large pull-right">Update</button>
-
                     </div>
             </form>
         </div>
 
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="well">
+                    <h3><span class="fa fa-user"></span> Local</h3>
 
-        
-    </section>    
+                    <div ng-if="authenticatedUser.local.email">
+                        <p>
+                            <strong>id</strong>: {{authenticatedUser._id}}<br>
+                            <strong>email</strong>: {{ authenticatedUser.local.email }} <br>
+                            <strong>password</strong>: {{ authenticatedUser.local.password }}
+                        </p>
+                        
+                        <a href="/unlink/local" class="btn btn-default">Unlink</a>
+                    </div>
+                    <a ng-if="!authenticatedUser.local.email" href="/connect/local" class="btn btn-default">Connect Local</a>
+                </div>
+            </div>
+
+            <div class="col-sm-6">
+                <div class="well">
+                    <h3><span class="fa fa-facebook"></span> Facebook</h3>
+
+                    <div ng-if="authenticatedUser.facebook.token">
+                        <p>
+                            <strong>id</strong>: {{authenticatedUser.facebook.id}}<br>
+                            <strong>token</strong>: {{authenticatedUser.facebook.token}}<br>
+                            <strong>email</strong>: {{ authenticatedUser.facebook.email }} <br>
+                            <strong>name</strong>: {{ authenticatedUser.facebook.name }}
+                        </p>
+                        
+                        <a href="/unlink/facebook" class="btn btn-default">Unlink</a>
+                    </div>
+                    <a ng-if="!authenticatedUser.facebook.token" href="/connect/facebook" class="btn btn-default">Connect Facebook</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="well">
+                    <h3><span class="fa fa-facebook"></span> Twitter</h3>
+
+                    <div ng-if="authenticatedUser.twitter.token">
+                        <p>
+                            <strong>id</strong>: {{authenticatedUser.twitter.id}}<br>
+                            <strong>token</strong>: {{authenticatedUser.twitter.token}}<br>
+                            <strong>display name</strong>: {{ authenticatedUser.twitter.displayName }} <br>
+                            <strong>name</strong>: {{ authenticatedUser.twitter.name }}
+                        </p>
+                        
+                        <a href="/unlink/twitter" class="btn btn-default">Unlink</a>
+                    </div>
+                    <a ng-if="!authenticatedUser.twitter.token" href="/connect/twitter" class="btn btn-default">Connect Twitter</a>
+                </div>
+            </div>
+
+            <div class="col-sm-6">
+                <div class="well">
+                    <h3><span class="fa fa-facebook"></span> Google+</h3>
+
+                    <div ng-if="authenticatedUser.google.token">
+                        <p>
+                            <strong>id</strong>: {{authenticatedUser.google.id}}  <br>
+                            <strong>token</strong>: {{authenticatedUser.google.token}}  <br>
+                            <strong>email</strong>: {{ authenticatedUser.google.email}}  <br>
+                            <strong>name</strong>: {{ authenticatedUser.google.name}} 
+                        </p>
+                        
+                        <a href="/unlink/google" class="btn btn-default">Unlink</a>
+                    </div>
+                    <a ng-if="!authenticatedUser.google.token" href="/connect/google" class="btn btn-default">Connect Google</a>
+                </div>
+            </div>
+        </div>
+    </section>
 </div>
 
 <!-- /#registration-page -->
