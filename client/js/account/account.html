@@ -49,7 +49,7 @@
                     <h3><span class="fa fa-user"></span> Local</h3>
 
                     <div ng-if="authenticatedUser.local.email">
-                        <p>
+                        <p class="account-dets">
                             <strong>id</strong>: {{authenticatedUser._id}}<br>
                             <strong>email</strong>: {{ authenticatedUser.local.email }} <br>
                             <strong>password</strong>: {{ authenticatedUser.local.password }}
@@ -63,10 +63,10 @@
 
             <div class="col-sm-6">
                 <div class="well">
-                    <h3><span class="fa fa-facebook"></span> Facebook</h3>
+                    <h3 class="text-primary"><span class="fa fa-facebook"></span> Facebook</h3>
 
                     <div ng-if="authenticatedUser.facebook.token">
-                        <p>
+                        <p  class="account-dets">
                             <strong>id</strong>: {{authenticatedUser.facebook.id}}<br>
                             <strong>token</strong>: {{authenticatedUser.facebook.token}}<br>
                             <strong>email</strong>: {{ authenticatedUser.facebook.email }} <br>
@@ -83,10 +83,10 @@
         <div class="row">
             <div class="col-sm-6">
                 <div class="well">
-                    <h3><span class="fa fa-facebook"></span> Twitter</h3>
+                    <h3 class="text-info"><span class="fa fa-facebook"></span> Twitter</h3>
 
                     <div ng-if="authenticatedUser.twitter.token">
-                        <p>
+                        <p class="account-dets">
                             <strong>id</strong>: {{authenticatedUser.twitter.id}}<br>
                             <strong>token</strong>: {{authenticatedUser.twitter.token}}<br>
                             <strong>display name</strong>: {{ authenticatedUser.twitter.displayName }} <br>
@@ -101,10 +101,10 @@
 
             <div class="col-sm-6">
                 <div class="well">
-                    <h3><span class="fa fa-facebook"></span> Google+</h3>
+                    <h3 class="text-danger"><span class="fa fa-facebook"></span> Google+</h3>
 
                     <div ng-if="authenticatedUser.google.token">
-                        <p>
+                        <p class="account-dets">
                             <strong>id</strong>: {{authenticatedUser.google.id}}  <br>
                             <strong>token</strong>: {{authenticatedUser.google.token}}  <br>
                             <strong>email</strong>: {{ authenticatedUser.google.email}}  <br>
