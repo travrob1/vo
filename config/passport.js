@@ -73,7 +73,6 @@ module.exports = function(passport) {
         passReqToCallback : true // allows us to pass in the req from our route (lets us check if a user is logged in or not)
     },
     function(req, email, password, done) {
-
         // asynchronous
         process.nextTick(function() {
 
@@ -92,8 +91,11 @@ module.exports = function(passport) {
                 //  If we're logged in, we're connecting a new local account.
                 if(req.user) {
                     var user            = req.user;
+
                     user.local.email    = email;
                     user.local.password = user.generateHash(password);
+                    user.local.username = req.body.username;
+                    
                     user.save(function(err) {
                         if (err)
                             throw err;
@@ -104,10 +106,13 @@ module.exports = function(passport) {
                 else {
                     // create the user
                     var newUser            = new User();
-
+                    
                     newUser.local.email    = email;
                     newUser.local.password = newUser.generateHash(password);
+                    newUser.local.username = req.body.username;
 
+
+                    console.log(newUser); 
                     newUser.save(function(err) {
                         if (err)
                             throw err;
