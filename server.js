@@ -13,6 +13,8 @@ var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var session = require('cookie-session');
+var exphbs  = require('express-handlebars');
+
 
 
 var configDB = require('./config/database.js');
@@ -31,7 +33,18 @@ app.configure(function() {
 	app.use(express.cookieParser()); // read cookies (needed for auth)
 	app.use(express.bodyParser()); // get information from html forms
 
-	app.set('view engine', 'ejs'); // set up ejs for templating
+	var templateDir = path.join(__dirname, 'templates/');
+	app.set('views', templateDir);
+	app.engine('handlebars', exphbs({
+	  defaultLayout: 'index',
+	  layoutsDir: templateDir,
+	  helpers: {
+	    json: function(context) {
+	      return JSON.stringify(context);
+	    }
+	  }
+	}));
+	app.set('view engine', 'handlebars');
 
 	// required for passport
 	app.use(express.session({ secret: 'ilovescotchscotchyscotchscotch' })); // session secret

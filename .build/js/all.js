@@ -1,5 +1,5 @@
 /*global angular, $*/
-var app = angular.module('app', ['ui.router', 'ngResource', 'ui.validate']);
+var app = angular.module('app', ['ui.router', 'ngResource', 'ui.validate', 'app.config']);
 
 app.config( function($stateProvider, $urlRouterProvider) {
     var requireAuthUser = {
@@ -157,34 +157,6 @@ app.controller('globalCtrl', function($scope, $location, $http, AuthService, sta
 
 });
 'use strict';
-/*global angular */
-angular.module('app').controller('accountCtrl',function($scope, FirepolUser, $http){
-    function populateUserInfo(u) {
-        $scope.user.name = u.username;
-        $scope.user.email = u.email;
-    }
-
-    $scope.user = {};
-    $scope.userPasswords = {};
-    FirepolUser.findById({id: $scope.$root.authenticatedUser.id}).$promise
-    .then(populateUserInfo, console.error);
-    
-    $scope.updateAccount = function () {
-        FirepolUser.prototype$updateAttributes({id: $scope.$root.authenticatedUser.id},
-            {username: $scope.user.name,
-            email: $scope.user.email
-            });
-    };
-
-    $scope.updatePassword = function() {
-        function updatedPassword(s, e) {
-            console.log('updatePassword', s, e);
-        }
-        $http.put('/api/FirepolUsers/updatePassword', $scope.userPasswords)
-            .then(updatedPassword);
-    };
-});
-'use strict';
 
 /*global angular, $, _ */
 
@@ -278,6 +250,34 @@ angular.module('app').factory('AuthService', function($rootScope, $http, $q, $lo
         logout: logout,
         register: register,
         getCurrent: getCurrent
+    };
+});
+'use strict';
+/*global angular */
+angular.module('app').controller('accountCtrl',function($scope, FirepolUser, $http){
+    function populateUserInfo(u) {
+        $scope.user.name = u.username;
+        $scope.user.email = u.email;
+    }
+
+    $scope.user = {};
+    $scope.userPasswords = {};
+    FirepolUser.findById({id: $scope.$root.authenticatedUser.id}).$promise
+    .then(populateUserInfo, console.error);
+    
+    $scope.updateAccount = function () {
+        FirepolUser.prototype$updateAttributes({id: $scope.$root.authenticatedUser.id},
+            {username: $scope.user.name,
+            email: $scope.user.email
+            });
+    };
+
+    $scope.updatePassword = function() {
+        function updatedPassword(s, e) {
+            console.log('updatePassword', s, e);
+        }
+        $http.put('/api/FirepolUsers/updatePassword', $scope.userPasswords)
+            .then(updatedPassword);
     };
 });
 'use strict';
@@ -739,53 +739,54 @@ var Dconsole = {
 
 
 /*global angular, _ */
-angular.module('app').controller('profileCtrl', function($scope, $filter, $q, $state, configuration, UserProfile, FirepolUser, state){
-    $scope.capitalize = $filter('capitalize');
-    $scope.userProfile = {}; //UserProfile.create({userId: '1', sex: 'male'});
+angular.module('app').controller('profileCtrl', function($scope, $filter, $q, $state, state, config){
+    console.log(config);
+    // $scope.capitalize = $filter('capitalize');
+    // $scope.userProfile = {}; //UserProfile.create({userId: '1', sex: 'male'});
 
-    UserProfile.getUserProfileDefinition().$promise
-     .then(function(data){
+    // UserProfile.getUserProfileDefinition().$promise
+    //  .then(function(data){
 
-        var currCat, categoryList = [], rowDefList;
-        _.forEach(data.userProfileDefinition, function(def) {
+    //     var currCat, categoryList = [], rowDefList;
+    //     _.forEach(data.userProfileDefinition, function(def) {
 
-            if (currCat !== def.category) {
-                currCat = def.category;
-                rowDefList = {category: def.category, rowDefList: []};
-                categoryList.push(rowDefList);
-            }
-            rowDefList.rowDefList.push(def);
-        });
-        $scope.categoryList = categoryList;
+    //         if (currCat !== def.category) {
+    //             currCat = def.category;
+    //             rowDefList = {category: def.category, rowDefList: []};
+    //             categoryList.push(rowDefList);
+    //         }
+    //         rowDefList.rowDefList.push(def);
+    //     });
+    //     $scope.categoryList = categoryList;
          
-     },console.log, 
-     console.log);
+    //  },console.log, 
+    //  console.log);
 
-    function findOrCreateProfile(p) {
-        if (p.length) {
-            $scope.userProfile = p[0];
-        } else {
-            FirepolUser.UserProfile.create(
-                {id: $scope.$root.authenticatedUser.id},
-                $scope.userProfile).$promise
-                .then(createdProfile);
-        }
-     }
-     function createdProfile(p) {
-         $scope.userProfile = p;
-     }
-     FirepolUser.UserProfile({id: $scope.$root.authenticatedUser.id}).$promise
-        .then(findOrCreateProfile);
+    // function findOrCreateProfile(p) {
+    //     if (p.length) {
+    //         $scope.userProfile = p[0];
+    //     } else {
+    //         FirepolUser.UserProfile.create(
+    //             {id: $scope.$root.authenticatedUser.id},
+    //             $scope.userProfile).$promise
+    //             .then(createdProfile);
+    //     }
+    //  }
+    //  function createdProfile(p) {
+    //      $scope.userProfile = p;
+    //  }
+    //  FirepolUser.UserProfile({id: $scope.$root.authenticatedUser.id}).$promise
+    //     .then(findOrCreateProfile);
 
-     $scope.update = function() {
-        FirepolUser.UserProfile.updateById({
-            id: $scope.$root.authenticatedUser.id, 
-            fk: $scope.userProfile.id
-        }, $scope.userProfile);
-        if (state.ui.firstTimeLoggedIn){
-            $state.transitionTo('questions');
-        }
-     };
+    //  $scope.update = function() {
+    //     FirepolUser.UserProfile.updateById({
+    //         id: $scope.$root.authenticatedUser.id, 
+    //         fk: $scope.userProfile.id
+    //     }, $scope.userProfile);
+    //     if (state.ui.firstTimeLoggedIn){
+    //         $state.transitionTo('questions');
+    //     }
+    //  };
 });
 
 'use strict';
