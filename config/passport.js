@@ -56,8 +56,15 @@ module.exports = function(passport) {
                     return done(null, false, req.flash('loginMessage', 'Oops! Wrong password.'));
 
                 // all is well, return user
-                else
-                    return done(null, user);
+                else {
+                    user.modified = new Date();
+                    user.save(function(err) {
+                        if (err)
+                            throw err;
+                        return done(null, user);
+                    });
+                }
+                    
             });
         });
 
@@ -96,6 +103,7 @@ module.exports = function(passport) {
                     user.local.password = user.generateHash(password);
                     user.username = req.body.username;
 
+
                     user.save(function(err) {
                         if (err)
                             throw err;
@@ -110,9 +118,9 @@ module.exports = function(passport) {
                     newUser.local.email    = email;
                     newUser.local.password = newUser.generateHash(password);
                     newUser.username = req.body.username;
+                    newUser.created = new Date();
+                    newUser.modified = new Date();
 
-
-                    console.log(newUser); 
                     newUser.save(function(err) {
                         if (err)
                             throw err;
@@ -133,7 +141,7 @@ module.exports = function(passport) {
     fbStrategy.passReqToCallback = true;  // allows us to pass in the req from our route (lets us check if a user is logged in or not)
     passport.use(new FacebookStrategy(fbStrategy,
     function(req, token, refreshToken, profile, done) {
-
+        console.log(profile); 
         // asynchronous
         process.nextTick(function() {
 
@@ -151,7 +159,17 @@ module.exports = function(passport) {
                             user.facebook.token = token;
                             user.facebook.name  = profile.name.givenName + ' ' + profile.name.familyName;
                             user.facebook.email = profile.emails[0].value;
+                            user.modified = new Date();
 
+
+                            user.save(function(err) {
+                                if (err)
+                                    throw err;
+                                return done(null, user);
+                            });
+                        }else {
+                            // user found, return that user
+                            user.modified = new Date();
                             user.save(function(err) {
                                 if (err)
                                     throw err;
@@ -159,7 +177,6 @@ module.exports = function(passport) {
                             });
                         }
 
-                        return done(null, user); // user found, return that user
                     } else {
                         // if there is no user, create them
                         var newUser            = new User();
@@ -168,6 +185,9 @@ module.exports = function(passport) {
                         newUser.facebook.token = token;
                         newUser.facebook.name  = profile.name.givenName + ' ' + profile.name.familyName;
                         newUser.facebook.email = profile.emails[0].value;
+                        newUser.photo = profile.photos[0].value;
+                        newUser.created = new Date();
+                        newUser.modified = new Date();
 
                         newUser.save(function(err) {
                             if (err)
@@ -275,16 +295,12 @@ module.exports = function(passport) {
     // =========================================================================
     // GOOGLE ==================================================================
     // =========================================================================
-    passport.use(new GoogleStrategy({
+    var googleStrategy = configAuth.googleAuth;
+    googleStrategy.passReqToCallback = true;
 
-        clientID        : configAuth.googleAuth.clientID,
-        clientSecret    : configAuth.googleAuth.clientSecret,
-        callbackURL     : configAuth.googleAuth.callbackURL,
-        passReqToCallback : true // allows us to pass in the req from our route (lets us check if a user is logged in or not)
-
-    },
+    passport.use(new GoogleStrategy(googleStrategy,
     function(req, token, refreshToken, profile, done) {
-
+        console.log(profile);
         // asynchronous
         process.nextTick(function() {
 
@@ -302,7 +318,17 @@ module.exports = function(passport) {
                             user.google.token = token;
                             user.google.name  = profile.displayName;
                             user.google.email = profile.emails[0].value; // pull the first email
+                            user.modified = new Date();
 
+
+                            user.save(function(err) {
+                                if (err)
+                                    throw err;
+                                return done(null, user);
+                            });
+                        } else {
+                            // user found, return that user
+                            user.modified = new Date();
                             user.save(function(err) {
                                 if (err)
                                     throw err;
@@ -310,7 +336,6 @@ module.exports = function(passport) {
                             });
                         }
 
-                        return done(null, user);
                     } else {
                         var newUser          = new User();
 
@@ -318,6 +343,9 @@ module.exports = function(passport) {
                         newUser.google.token = token;
                         newUser.google.name  = profile.displayName;
                         newUser.google.email = profile.emails[0].value; // pull the first email
+                        newUser.photo = profile._json.picture;
+                        newUser.created = new Date();
+                        newUser.modified = new Date();
 
                         newUser.save(function(err) {
                             if (err)

@@ -13,27 +13,32 @@
         <form ng-submit="addUserName()" novalidate=""> 
             <div class="row form-group">
                 <div class="col-xs-12 col-sm-8 col-sm-offset-2">
-                    <h1 style="margin-top:0">Registeration Successful</h1>
-                    <hr>
-                    <h4>Please add a username to your account that will be your display name on all posts and comments.</h4>
-                    <label>Username:</label>
-                    <input type="text" class="form-control" required="required" ng-model="update.username" novalidate>
-                    <br>
-                    <div style="margin-bottom: 15px;">
-                        
-                        <label>Do you want to use this images on Firepol?</label>
-                        <br>
-                            <img class="avatar" ng-src="{{authenticatedUser.profiles[0].profile.photos[0].value}}" alt="">
-                        
-                   
-                        <button class="btn btn-primary">Yes</button>
-                        <button class="btn btn-primary">No</button>
+                    <h1 style="margin:0 0 25px ">Registeration Successful</h1>
+
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <div style="margin-bottom: 15px;">
+                                
+                                <img class="avatar" ng-src="{{photo}}" alt="">
+                                <br>
+                                <br>
+                                <button class="btn btn-primary btn-block">Change Photo</button>
+                            </div>
+                        </div>
+                        <div class="col-xs-9">
+                            <label>Username:</label>
+                            <input type="text" class="form-control" required="required" ng-model="authenticatedUser.username" novalidate>
+                            <br>
+                        </div>
                     </div>
+                    <hr>
+                    
+                    
                     
                     <br>
                     <br>
 
-                    <button type="submit" class="btn btn-primary btn-large pull-right">Update</button>
+                    <button type="submit" class="btn btn-primary btn-large pull-right">Save</button>
 
                 </div>
             </div>

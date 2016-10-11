@@ -2,6 +2,8 @@
 
 angular.module('app')
 .controller('registerCtrl',function($scope, $state,  AuthService, $location, state){
+    $scope.photo = $scope.$root.authenticatedUser.photo || '/images/avatar.png';
+    
     $scope.register = function(){
         AuthService.register($scope.user.email, $scope.user.password, $scope.user.username)
             .then(function(res){
@@ -38,4 +40,6 @@ angular.module('app')
         //     }
         // });
     };
+
+
 });

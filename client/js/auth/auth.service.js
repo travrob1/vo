@@ -67,6 +67,8 @@ angular.module('app').factory('AuthService', function($rootScope, $http, $q, $lo
         return $q (function(resolve, reject){
             if(config.user){
                 $rootScope.authenticatedUser = config.user;
+                $rootScope.$broadcast('UserSetToScope');
+
                 return resolve();
             }else {
                 return reject();
