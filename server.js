@@ -14,6 +14,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var session = require('cookie-session');
 var exphbs  = require('express-handlebars');
+var _ = require('lodash');
 
 
 

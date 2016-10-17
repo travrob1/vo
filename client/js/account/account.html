@@ -12,54 +12,78 @@
 <div class="container">
     <section id="registration-page" >
         <div class="row form-group">
-            <form ng-submit="updateAccount()"> 
-                
-                    <div class="col-xs-12 col-sm-5">
-                        <label>Display name</label>
-                        <div>Identifies you to the general public.  It can be a handle or nickname.</div>
-                        <input type="text" class="form-control" ng-model="user.name">
-                        <label for="email">Email</label>
-                        <div>This is not shared publicly.</div>
-                        <input type="text" class="form-control" required="required" ng-model="user.email">
-                        <br>
+            <div class="col-sm-12">
+                <div class="well">
+                    <div class="row">
                         
-                        <button type="submit" class="btn btn-primary btn-large pull-right">Update</button>
+                        <div class="col-xs-3">
+                            <form name="photoUpdate" id="photoUpdateForm">
+                                <div style="margin-bottom: 15px;">
+                                    <img class="avatar" ng-src="{{photo}}" alt="">
+                                    <br>
+                                    <br>
+                                    <input id="photo" name="photo" type="file" class="hidden">
 
-                    </div>
-            </form>
+                                    <label ng-click="add()" for="photo" class="btn btn-primary btn-block" ng-click="changePhoto()">Change Photo</label>
+                                </div>
+                            </form>
+                        </div>
 
-            <form ng-submit="updatePassword()"> 
-                    <div class="col-xs-12 col-sm-5  col-sm-offset-1">
-                        <label>Existing Password</label>
-                        <input type="text" class="form-control" required="required" ng-model="userPasswords.oldPassword">
-                        <label>New Password</label>
-                        <input type="text" class="form-control" required="required" ng-model="userPasswords.newPassword">
-                        <label for="email">Confirm Password</label>
-                        <input type="text" class="form-control" required="required" ng-model="confirmPassword">
-                        <br>
-                        
-                        <button type="submit" class="btn btn-primary btn-large pull-right">Update</button>
+                        <div class="col-xs-9">
+                            <form name="userUpdateForm" ng-submit="userUpdate()" novalidate=""> 
+                                <label>User Name:</label>
+                                <input type="text" class="form-control" required="required" ng-model="authenticatedUser.username" novalidate>
+                                <div class="form-group">
+                                    <label class="ng-binding">Education level (optional)</label>
+
+                                    <select ng-model="userProfile[field.member]" class="form-control input-block-level ng-pristine ng-valid ng-empty ng-touched" ng-options="str for str in educationOptions"></select>
+                                </div>
+                                <hr>
+                                <br>
+                                <br>
+                                <button type="submit" class="btn btn-primary btn-large pull-right">Save</button>
+                            </form>
+                        </div>
                     </div>
-            </form>
+
+                </div>
+            </div>
+            
         </div>
 
         <div class="row">
-            <div class="col-sm-6">
+            <div class="col-sm-12">
                 <div class="well">
                     <h3><span class="fa fa-user"></span> Local</h3>
 
                     <div ng-if="authenticatedUser.local.email">
                         <p class="account-dets">
-                            <strong>id</strong>: {{authenticatedUser._id}}<br>
+                            <!-- <strong>id</strong>: {{authenticatedUser._id}}<br> -->
                             <strong>email</strong>: {{ authenticatedUser.local.email }} <br>
-                            <strong>password</strong>: {{ authenticatedUser.local.password }}
                         </p>
+
+                        <form ng-submit="updatePassword()"> 
+                            <label>Existing Password</label>
+                            <input type="text" class="form-control" required="required" ng-model="userPasswords.oldPassword">
+                            <label>New Password</label>
+                            <input type="text" class="form-control" required="required" ng-model="userPasswords.newPassword">
+                            <label for="email">Confirm Password</label>
+                            <input type="text" class="form-control" required="required" ng-model="confirmPassword">
+                            <br>
+                            
+                            <button type="submit" class="btn btn-primary btn-large pull-right">Update</button>
+                        </form>
                         
                         <a href="/unlink/local" class="btn btn-default">Unlink</a>
                     </div>
                     <a ng-if="!authenticatedUser.local.email" href="/connect/local" class="btn btn-default">Connect Local</a>
                 </div>
             </div>
+
+            
+        </div>
+
+        <div class="row">
 
             <div class="col-sm-6">
                 <div class="well">
@@ -68,7 +92,7 @@
                     <div ng-if="authenticatedUser.facebook.token">
                         <p  class="account-dets">
                             <strong>id</strong>: {{authenticatedUser.facebook.id}}<br>
-                            <strong>token</strong>: {{authenticatedUser.facebook.token}}<br>
+                            <!-- <strong>token</strong>: {{authenticatedUser.facebook.token}}<br> -->
                             <strong>email</strong>: {{ authenticatedUser.facebook.email }} <br>
                             <strong>name</strong>: {{ authenticatedUser.facebook.name }}
                         </p>
@@ -78,35 +102,15 @@
                     <a ng-if="!authenticatedUser.facebook.token" href="/connect/facebook" class="btn btn-default">Connect Facebook</a>
                 </div>
             </div>
-        </div>
-
-        <div class="row">
+          
             <div class="col-sm-6">
                 <div class="well">
-                    <h3 class="text-info"><span class="fa fa-facebook"></span> Twitter</h3>
-
-                    <div ng-if="authenticatedUser.twitter.token">
-                        <p class="account-dets">
-                            <strong>id</strong>: {{authenticatedUser.twitter.id}}<br>
-                            <strong>token</strong>: {{authenticatedUser.twitter.token}}<br>
-                            <strong>display name</strong>: {{ authenticatedUser.twitter.displayName }} <br>
-                            <strong>name</strong>: {{ authenticatedUser.twitter.name }}
-                        </p>
-                        
-                        <a href="/unlink/twitter" class="btn btn-default">Unlink</a>
-                    </div>
-                    <a ng-if="!authenticatedUser.twitter.token" href="/connect/twitter" class="btn btn-default">Connect Twitter</a>
-                </div>
-            </div>
-
-            <div class="col-sm-6">
-                <div class="well">
-                    <h3 class="text-danger"><span class="fa fa-facebook"></span> Google+</h3>
+                    <h3 class="text-danger"><span class="fa fa-google"></span> Google+</h3>
 
                     <div ng-if="authenticatedUser.google.token">
                         <p class="account-dets">
                             <strong>id</strong>: {{authenticatedUser.google.id}}  <br>
-                            <strong>token</strong>: {{authenticatedUser.google.token}}  <br>
+                            <!-- <strong>token</strong>: {{authenticatedUser.google.token}}  <br> -->
                             <strong>email</strong>: {{ authenticatedUser.google.email}}  <br>
                             <strong>name</strong>: {{ authenticatedUser.google.name}} 
                         </p>

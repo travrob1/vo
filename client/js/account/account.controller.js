@@ -1,6 +1,8 @@
 'use strict';
 /*global angular */
 angular.module('app').controller('accountCtrl',function($scope, $http){
+    $scope.photo = $scope.$root.authenticatedUser.photo || '/images/avatar.png';
+    
     function populateUserInfo(u) {
         $scope.user.name = u.username;
         $scope.user.email = u.email;
