@@ -21,9 +21,13 @@
                                         <img class="avatar" ng-src="{{photo}}" alt="">
                                         <br>
                                         <br>
-                                        <input id="photo" name="photo" type="file" class="hidden">
+                                        <!-- <input id="photo" name="photo" type="file" class="hidden">
 
-                                        <label ng-click="add()" for="photo" class="btn btn-primary btn-block" ng-click="changePhoto()">Change Photo</label>
+                                        <label ng-click="add()" for="photo" class="btn btn-primary btn-block" ng-click="changePhoto()">Change Photo</label> -->
+
+                                        <button type="file" ngf-select="uploadFiles($file, $invalidFiles)"
+                                                  accept="image/*" ngf-max-height="1000" ngf-max-size="1MB">
+                                              Select File</button>
                                     </div>
                                 </form>
                             </div>

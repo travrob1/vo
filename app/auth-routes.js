@@ -1,6 +1,5 @@
-var _ = require('lodash');
 
-module.exports = function(app, passport) {
+module.exports = function(app, passport, _) {
 
     // normal routes ===============================================================
 
@@ -205,25 +204,6 @@ module.exports = function(app, passport) {
         user.save(function(err) {
             res.redirect('#/account');
         });
-    });
-
-
-    // =============================================================================
-    // UTILITY ROUTES =============================================================
-    // =============================================================================
-
-    app.post('/user-update',function (req, res) {
-        console.log(req.body);
-        var user = req.user;
-        
-        _.merge(user, req.body.user);
-        user.save(function (err, updatedUser) {
-            if (err) {
-                res.status(500).send('User not updated', err);
-            }
-            res.send(updatedUser);
-        });
-        
     });
 
 };

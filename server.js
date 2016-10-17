@@ -54,12 +54,14 @@ app.configure(function() {
 	app.use(flash()); // use connect-flash for flash messages stored in session
 	app.use(express.static(path.join(__dirname, '/client')));
 	app.use(express.static(path.join(__dirname, '/bower_components')));
+	app.use(express.static(path.join(__dirname, '/node_modules')));
 	app.use(express.static(path.join(__dirname, '/.build')));
 
 });
 
 // routes ======================================================================
-require('./app/routes.js')(app, passport); // load our routes and pass in our app and fully configured passport
+require('./app/auth-routes.js')(app, passport, _); // load our routes and pass in our app and fully configured passport
+require('./app/app-routes.js')(app, _); 
 
 // launch ======================================================================
 app.listen(port);
