@@ -16,8 +16,6 @@ var session = require('cookie-session');
 var exphbs  = require('express-handlebars');
 var _ = require('lodash');
 
-
-
 var configDB = require('./config/database.js');
 
 

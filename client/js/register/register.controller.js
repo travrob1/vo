@@ -11,57 +11,30 @@ angular.module('app')
         });
     };
 
-    // $scope.uploadFiles = function(image) {
-    //     debugger
-    //   $scope.uploadInProgress = true;
-    //   $scope.uploadProgress = 0;
-
-    //   if (angular.isArray(image)) {
-    //     image = image[0];
-    //   }
-
-    //   $scope.upload = Upload.upload({
-    //     url: '/api/v1/upload/image',
-    //     method: 'POST',
-    //     data: {
-    //       type: 'profile'
-    //     },
-    //     file: image
-    //   }).progress(function(event) {
-    //     $scope.uploadProgress = Math.floor(event.loaded / event.total);
-    //     $scope.$apply();
-    //   }).success(function(data, status, headers, config) {
-    //     AlertService.success('Photo uploaded!');
-    //   }).error(function(err) {
-    //     $scope.uploadInProgress = false;
-    //     AlertService.error('Error uploading file: ' + err.message || err);
-    //   });
-    // };
-
 
     $scope.uploadFiles = function(file, errFiles) {
-        debugger
-            $scope.f = file;
-            $scope.errFile = errFiles && errFiles[0];
-            if (file) {
-                file.upload = Upload.upload({
-                    url: 'avatar-upload',
-                    data: {file: file}
-                });
+        $scope.f = file;
+        $scope.errFile = errFiles && errFiles[0];
+        if (file) {
+            file.upload = Upload.upload({
+                url: 'avatar-upload',
+                data: {file: file}
+            });
 
-                file.upload.then(function (response) {
-                    $timeout(function () {
-                        file.result = response.data;
-                    });
-                }, function (response) {
-                    if (response.status > 0)
-                        $scope.errorMsg = response.status + ': ' + response.data;
-                }, function (evt) {
-                    file.progress = Math.min(100, parseInt(100.0 * 
-                                             evt.loaded / evt.total));
+            file.upload.then(function (response) {
+                $timeout(function () {
+                    $scope.$root.authenticatedUser = response.data;
+                    $scope.$apply();
                 });
-            }   
-        };
+            }, function (response) {
+                if (response.status > 0)
+                    $scope.errorMsg = response.status + ': ' + response.data;
+            }, function (evt) {
+                file.progress = Math.min(100, parseInt(100.0 * 
+                                         evt.loaded / evt.total));
+            });
+        }   
+    };
 
 
 });

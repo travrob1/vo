@@ -12,22 +12,18 @@
     <section id="registration-page" >
             <div class="row form-group">
                 <div class="col-xs-12 col-sm-8 col-sm-offset-2">
-                    <h1 style="margin:0 0 25px ">Registeration Successful</h1>
-
+                    <h3 style="margin:0 0 15px; font-weight: 700; ">Registeration Successful</h3>
+                    <h4 ng-hide="authenticatedUser.username">Please add a username.  This will be your display name when you comment or post.</h4>
                     <div class="row">
                             <div class="col-xs-3">
-                                <form name="photoUpdate" id="photoUpdateForm">
+                                <form >
                                     <div style="margin-bottom: 15px;">
-                                        <img class="avatar" ng-src="{{photo}}" alt="">
+                                        <img class="avatar" ng-src="{{authenticatedUser.photo || '/images/avatar.png'}}" alt="">
                                         <br>
                                         <br>
-                                        <!-- <input id="photo" name="photo" type="file" class="hidden">
-
-                                        <label ng-click="add()" for="photo" class="btn btn-primary btn-block" ng-click="changePhoto()">Change Photo</label> -->
-
-                                        <button type="file" ngf-select="uploadFiles($file, $invalidFiles)"
-                                                  accept="image/*" ngf-max-height="1000" ngf-max-size="1MB">
-                                              Select File</button>
+                                        <button class="btn btn-primary btn-block" type="file" name="file" id="file" ngf-select="uploadFiles($file, $invalidFiles)" accept="image/*" ngf-max-height="1000" ngf-max-size="1MB">
+                                              Change Photo
+                                        </button>
                                     </div>
                                 </form>
                             </div>
@@ -40,7 +36,7 @@
                                     <div class="form-group">
                                         <label class="ng-binding">Education level (optional)</label>
 
-                                        <select ng-model="userProfile[field.member]" class="form-control input-block-level ng-pristine ng-valid ng-empty ng-touched" ng-options="str for str in educationOptions"></select>
+                                        <select ng-model="userProfile[field.member]" class="input-block-level ng-pristine ng-valid ng-empty ng-touched" ng-options="str for str in educationOptions"></select>
                                     </div>
                                     <hr>
                                     <br>
