@@ -21,9 +21,11 @@
                                         <img class="avatar" ng-src="{{authenticatedUser.photo || '/images/avatar.png'}}" alt="">
                                         <br>
                                         <br>
-                                        <button class="btn btn-primary btn-block" type="file" name="file" id="file" ngf-select="uploadFiles($file, $invalidFiles)" accept="image/*" ngf-max-height="1000" ngf-max-size="1MB">
-                                              Change Photo
+
+                                        <button id="theFileButton" class="btn btn-primary btn-block" ngf-select="callModal($file)" ng-model="picFile" accept="image/*">
+                                            Change Photo
                                         </button>
+
                                     </div>
                                 </form>
                             </div>
@@ -55,5 +57,8 @@
         
     </section>    
 </div>
+
+
+<ng-include src="'/js/register/crop-img.modal.html'"> </ng-include>
 
 <!-- /#registration-page -->

@@ -1,5 +1,5 @@
 /*global angular, $*/
-var app = angular.module('app', ['ui.router', 'ngResource', 'ui.validate', 'app.config', 'ngFileUpload']);
+var app = angular.module('app', ['ui.router', 'ngResource', 'ui.validate', 'app.config', 'ngFileUpload', 'ngImgCrop']);
 
 app.config( function($stateProvider, $urlRouterProvider) {
     var requireAuthUser = {

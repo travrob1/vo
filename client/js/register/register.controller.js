@@ -11,29 +11,35 @@ angular.module('app')
         });
     };
 
+    $scope.upload = function (dataUrl, name) {
+        $('#cropImgModal').modal('hide');
+        $('#theFileButton').text('Loading...');
+        Upload.upload({
+            url: 'avatar-upload',
+            data: {
+                file: Upload.dataUrltoBlob(dataUrl, name)
+            },
+        }).then(function (response) {
+            $timeout(function () {
+                $scope.$root.authenticatedUser = response.data;
+                $scope.result = response.data;
+                $('#theFileButton').text('Change Photo');
 
-    $scope.uploadFiles = function(file, errFiles) {
-        $scope.f = file;
-        $scope.errFile = errFiles && errFiles[0];
-        if (file) {
-            file.upload = Upload.upload({
-                url: 'avatar-upload',
-                data: {file: file}
             });
+        }, function (response) {
+            console.log(response);
+            if (response.status > 0) {
+                $scope.errorMsg = response.status + ': ' + response.data;
+            }
+        }, function (evt) {
+            $scope.progress = parseInt(100.0 * evt.loaded / evt.total);
+        });
+    };
 
-            file.upload.then(function (response) {
-                $timeout(function () {
-                    $scope.$root.authenticatedUser = response.data;
-                    $scope.$apply();
-                });
-            }, function (response) {
-                if (response.status > 0)
-                    $scope.errorMsg = response.status + ': ' + response.data;
-            }, function (evt) {
-                file.progress = Math.min(100, parseInt(100.0 * 
-                                         evt.loaded / evt.total));
-            });
-        }   
+    $scope.callModal = function(val){
+        if(val){
+            $('#cropImgModal').modal('show');
+        }
     };
 
 
