@@ -1,0 +1,14 @@
+
+    <form name="userUpdateForm" ng-submit="userUpdate()" novalidate=""> 
+        <label>User Name:</label>
+        <input type="text" class="form-control" required="required" ng-model="authenticatedUser.username" novalidate>
+        <div class="form-group">
+            <label class="ng-binding">Education level (optional)</label>
+
+            <select ng-model="userProfile[field.member]" class="input-block-level ng-pristine ng-valid ng-empty ng-touched" ng-options="str for str in educationOptions"></select>
+        </div>
+        <hr>
+        <br>
+        <br>
+        <button type="submit" class="btn btn-primary btn-large pull-right">Save</button>
+    </form>

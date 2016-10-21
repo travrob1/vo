@@ -1,7 +1,7 @@
 /*global angular*/
 
 angular.module('app')
-.controller('registerCtrl',function($scope, $state,  AuthService, $location, state, Upload, $timeout){
+.controller('registerCtrl',function($scope, $state,  AuthService, $location, state, Upload, $timeout, cropPubSub){
     $scope.photo = $scope.$root.authenticatedUser.photo || '/images/avatar.png';
     $scope.educationOptions = ['less than highschool', 'highschool or equivalent', 'associates degree', 'bachelor of arts', 'bachelor of science', 'masters', 'doctorate or greater'];
    
@@ -27,7 +27,6 @@ angular.module('app')
 
             });
         }, function (response) {
-            console.log(response);
             if (response.status > 0) {
                 $scope.errorMsg = response.status + ': ' + response.data;
             }
@@ -39,8 +38,13 @@ angular.module('app')
     $scope.callModal = function(val){
         if(val){
             $('#cropImgModal').modal('show');
+            var myEvent = new cropPubSub();
+            $timeout(function(){
+                myEvent.trigger('area-move');
+            },200);
         }
     };
+
 
 
 });

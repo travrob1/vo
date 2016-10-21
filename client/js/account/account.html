@@ -15,35 +15,27 @@
             <div class="col-sm-12">
                 <div class="well">
                     <div class="row">
-                        
-                        <div class="col-xs-3">
-                            <form name="photoUpdate" id="photoUpdateForm">
-                                <div style="margin-bottom: 15px;">
-                                    <img class="avatar" ng-src="{{photo}}" alt="">
-                                    <br>
-                                    <br>
-                                    <input id="photo" name="photo" type="file" class="hidden">
+                            
 
-                                    <label ng-click="add()" for="photo" class="btn btn-primary btn-block" ng-click="changePhoto()">Change Photo</label>
-                                </div>
-                            </form>
-                        </div>
+                            <div class="col-xs-3">
+                                <form >
+                                    <div style="margin-bottom: 15px;">
+                                        <img class="avatar" ng-src="{{authenticatedUser.photo || '/images/avatar.png'}}" alt="">
+                                        <br>
+                                        <br>
 
-                        <div class="col-xs-9">
-                            <form name="userUpdateForm" ng-submit="userUpdate()" novalidate=""> 
-                                <label>User Name:</label>
-                                <input type="text" class="form-control" required="required" ng-model="authenticatedUser.username" novalidate>
-                                <div class="form-group">
-                                    <label class="ng-binding">Education level (optional)</label>
+                                        <button id="theFileButton" class="btn btn-primary btn-block" ngf-select="callModal($file)" ng-model="picFile" accept="image/*">
+                                            Change Photo
+                                        </button>
 
-                                    <select ng-model="userProfile[field.member]" class="form-control input-block-level ng-pristine ng-valid ng-empty ng-touched" ng-options="str for str in educationOptions"></select>
-                                </div>
-                                <hr>
-                                <br>
-                                <br>
-                                <button type="submit" class="btn btn-primary btn-large pull-right">Save</button>
-                            </form>
-                        </div>
+                                    </div>
+                                </form>
+                            </div>
+
+
+                            <div class="col-xs-9">
+                                <ng-include src="'js/account/profile.partial.html'"> </ng-include>
+                            </div>
                     </div>
 
                 </div>
@@ -124,4 +116,4 @@
     </section>
 </div>
 
-<!-- /#registration-page -->
+<ng-include src="'/js/account/crop-img.modal.html'"> </ng-include>
