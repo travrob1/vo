@@ -16,7 +16,7 @@ angular.module('app').controller('accountCtrl',function($scope, $state, $http, A
     
     $scope.userUpdate = function(){
         AuthService.userUpdate($scope.$root.authenticatedUser).then(function(){
-            $state.transitionTo('questions');
+            //show something
         });
     };
 

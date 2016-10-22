@@ -12,6 +12,16 @@ var multipartyMiddleware = multiparty();
 module.exports = function(app, _) {
     app.use(multipartyMiddleware);
 
+    // show the home page (will also have our login links)
+    app.get('/', function(req, res) {
+        res.render('index', {
+            config: JSON.stringify({
+                user: req.user || false
+            })
+        });
+    });
+
+
     app.post('/user-update',function (req, res) {
         var user = req.user;
         
@@ -22,7 +32,6 @@ module.exports = function(app, _) {
             }
             res.send(updatedUser);
         });
-        
     });
 
     app.post('/avatar-upload',function(req, res){
