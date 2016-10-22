@@ -1,8 +1,8 @@
 /*global angular*/
 
 angular.module('app')
-.controller('registerCtrl',function($scope, $state,  AuthService, $location, state, Upload, $timeout, cropPubSub){
-    $scope.photo = $scope.$root.authenticatedUser.photo || '/images/avatar.png';
+.controller('registerCtrl',function($scope, $state,  AuthService, $location, state, Upload, $timeout, cropPubSub, config){
+    $scope.photo = _.get($scope, '$root.authenticatedUser.photo') || '/images/avatar.png';
     $scope.educationOptions = ['less than highschool', 'highschool or equivalent', 'associates degree', 'bachelor of arts', 'bachelor of science', 'masters', 'doctorate or greater'];
    
     $scope.userUpdate = function(){

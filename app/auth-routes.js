@@ -3,6 +3,7 @@ module.exports = function(app, passport, _) {
 
     // normal routes ===============================================================
 
+    
  
     // LOGOUT ==============================
     app.get('/logout', function(req, res) {
@@ -16,27 +17,18 @@ module.exports = function(app, passport, _) {
 
     // locally --------------------------------
     // LOGIN ===============================
-    // show the login form
-    app.get('/login', function(req, res) {
-        res.render('login.ejs', {
-            message: req.flash('loginMessage')
-        });
-    });
+
 
     // process the login form
     app.post('/login', passport.authenticate('local-login', {
         successRedirect: '#/login-redirect', // redirect to the secure profile section
-        failureRedirect: '/login', // redirect back to the signup page if there is an error
+        failureRedirect: '#/', // redirect back to the signup page if there is an error
         failureFlash: true // allow flash messages
     }));
 
     // SIGNUP =================================
     // show the signup form
-    app.get('/register', function(req, res) {
-        res.render('signup.ejs', {
-            message: req.flash('loginMessage')
-        });
-    });
+
 
     // process the signup form
     app.post('/register', passport.authenticate('local-signup', {
@@ -44,6 +36,7 @@ module.exports = function(app, passport, _) {
         failureRedirect: '#/register', // redirect back to the signup page if there is an error
         failureFlash: true // allow flash messages
     }));
+
 
     // facebook -------------------------------
 

@@ -117,7 +117,7 @@ app.config( function($stateProvider, $urlRouterProvider) {
     });
 });
 
-app.controller('globalCtrl', function($scope, $location, $http, AuthService, state){
+app.controller('globalCtrl', function($scope, $location, $http, AuthService, state, config){
     AuthService.getCurrent();
     var theState = window.sessionStorage.getItem('state.ui');
     if (theState) {
@@ -153,6 +153,10 @@ app.controller('globalCtrl', function($scope, $location, $http, AuthService, sta
     $scope.registerFromModal = function(){
         $('.modal').modal('hide');
     };
+
+    if(config.message.length > 0){
+        $scope.notification = config.message[0];
+    }
 
 
 });

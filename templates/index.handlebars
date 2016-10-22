@@ -52,6 +52,13 @@
         
         <ng-include src="'js/header/header.html'"></ng-include>
         
+        <div id='notification-container' style="background-color: #fff" ng-show="notification" >
+            <div class="container" style="position: relative">
+                <div id="notifications" class="alert alert-danger"  ng-bind="notification"></div>
+                <span ng-click="notification = undefined">x</span>
+            </div>
+        </div>
+
         <div ui-view id="ng-view">
         </div>
 

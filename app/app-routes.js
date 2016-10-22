@@ -16,7 +16,8 @@ module.exports = function(app, _) {
     app.get('/', function(req, res) {
         res.render('index', {
             config: JSON.stringify({
-                user: req.user || false
+                user: req.user || false,
+                message: req.flash('authMessage')
             })
         });
     });
