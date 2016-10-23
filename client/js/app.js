@@ -155,7 +155,7 @@ app.controller('globalCtrl', function($scope, $location, $http, AuthService, sta
     };
 
     if(config.message.length > 0){
-        $scope.notification = config.message[0];
+        $scope.$root.notification = config.message[0];
     }
 
 

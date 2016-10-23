@@ -58,4 +58,16 @@ angular.module('app').controller('accountCtrl',function($scope, $state, $http, A
         $scope.connectLocal = true;
     };
 
+    $scope.updatepassword = function(){
+        $http.post('/updatepassword', {
+            existing: $scope.newPass.existing,
+            new: $scope.newPass.new,
+            newConf: $scope.newPass.newConf
+        }).then(function(res){
+            if(res.data.notification){
+                $scope.$root.notification = res.data.notification;
+            }
+        });
+    };
+
 });

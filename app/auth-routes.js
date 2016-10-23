@@ -37,6 +37,31 @@ module.exports = function(app, passport, _) {
         failureFlash: true // allow flash messages
     }));
 
+    // CHANGE PASS ============================
+
+    app.post('/updatepassword', function (req, res, next) {
+         var currentPass = req.body.existing;
+         var newPass = req.body.new;
+         var newPassConf = req.body.newConf;
+
+         var user = req.user;
+
+         if (!user.validPassword(currentPass)){
+            return res.send({notification: 'Existing password was incorrect'});
+         }
+
+         if(newPass != newPassConf){
+            return res.send({notification: 'New password did not match confirm password.'});
+         }else {
+            user.local.password = user.generateHash(newPass);
+
+            user.save(function(err) {
+                if (err)
+                    throw err;
+                return res.send({notification: 'Password updated successfully'});
+            });
+         }
+    });
 
     // facebook -------------------------------
 

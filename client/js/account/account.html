@@ -52,15 +52,15 @@
                         <p class="account-dets">
                             <strong>email</strong>: {{ authenticatedUser.local.email }} <br>
                         </p>
-                        br
+                        <br>
                         <h4 style="border-bottom: 1px solid #dadada; margin-bottom: 8px; padding-bottom: 10px;">Update Password</h4>
-                        <form ng-submit="updatePassword()"> 
+                        <form ng-submit="updatepassword()"> 
                             <label>Existing Password</label>
-                            <input type="text" class="form-control" required="required" ng-model="userPasswords.oldPassword">
+                            <input type="text" class="form-control" required="required" ng-model="$parent.newPass.existing">
                             <label>New Password</label>
-                            <input type="text" class="form-control" required="required" ng-model="userPasswords.newPassword">
+                            <input type="text" class="form-control" required="required" ng-model="$parent.newPass.new">
                             <label for="email">Confirm Password</label>
-                            <input type="text" class="form-control" required="required" ng-model="confirmPassword">
+                            <input type="text" class="form-control" required="required" ng-model="$parent.newPass.newConf">
                             <br>
                             
                             <button type="submit" class="btn btn-primary btn-large pull-right">Update</button>
