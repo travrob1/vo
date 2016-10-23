@@ -50,10 +50,10 @@
 
                     <div ng-if="authenticatedUser.local.email">
                         <p class="account-dets">
-                            <!-- <strong>id</strong>: {{authenticatedUser._id}}<br> -->
                             <strong>email</strong>: {{ authenticatedUser.local.email }} <br>
                         </p>
-
+                        br
+                        <h4 style="border-bottom: 1px solid #dadada; margin-bottom: 8px; padding-bottom: 10px;">Update Password</h4>
                         <form ng-submit="updatePassword()"> 
                             <label>Existing Password</label>
                             <input type="text" class="form-control" required="required" ng-model="userPasswords.oldPassword">
@@ -68,12 +68,26 @@
                         
                         <a href="/unlink/local" class="btn btn-default">Unlink</a>
                     </div>
-                    <a ng-if="!authenticatedUser.local.email" href="/connect/local" class="btn btn-default">Connect Local</a>
+                    <a ng-if="!authenticatedUser.local.email" ng-click="showLinkForm()"  class="btn btn-default">Connect Local</a>
+
+                    <form action="/connect/local" method="post" ng-if="connectLocal"> 
+                       
+                        <label>Email</label>
+                        <input type="text" class="form-control" required="required" ng-model="user.email" name="email">
+                        
+                        <label>Password</label>
+                        <input type="password" class="form-control" required="required" ng-model="user.password" name="password">
+                        
+
+                        <br>
+                        <button type="submit" class="btn btn-primary btn-large pull-right">Connect</button>
+
+                   
+                    </form>
                 </div>
             </div>
-
-            
         </div>
+
 
         <div class="row">
 
@@ -84,7 +98,6 @@
                     <div ng-if="authenticatedUser.facebook.token">
                         <p  class="account-dets">
                             <strong>id</strong>: {{authenticatedUser.facebook.id}}<br>
-                            <!-- <strong>token</strong>: {{authenticatedUser.facebook.token}}<br> -->
                             <strong>email</strong>: {{ authenticatedUser.facebook.email }} <br>
                             <strong>name</strong>: {{ authenticatedUser.facebook.name }}
                         </p>
@@ -102,7 +115,6 @@
                     <div ng-if="authenticatedUser.google.token">
                         <p class="account-dets">
                             <strong>id</strong>: {{authenticatedUser.google.id}}  <br>
-                            <!-- <strong>token</strong>: {{authenticatedUser.google.token}}  <br> -->
                             <strong>email</strong>: {{ authenticatedUser.google.email}}  <br>
                             <strong>name</strong>: {{ authenticatedUser.google.name}} 
                         </p>

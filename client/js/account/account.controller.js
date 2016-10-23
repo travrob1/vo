@@ -1,7 +1,7 @@
 'use strict';
 /*global angular, $ */
 angular.module('app').controller('accountCtrl',function($scope, $state, $http, AuthService, Upload, $timeout, cropPubSub){
-    
+    $scope.connectLocal = undefined;
     function populateUserInfo(u) {
         $scope.user.name = u.username;
         $scope.user.email = u.email;
@@ -52,6 +52,10 @@ angular.module('app').controller('accountCtrl',function($scope, $state, $http, A
                 myEvent.trigger('area-move');
             },200);
         }
+    };
+
+    $scope.showLinkForm = function(){
+        $scope.connectLocal = true;
     };
 
 });
