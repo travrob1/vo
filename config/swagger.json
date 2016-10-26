@@ -1,6 +1,7 @@
 {
     "swagger": "2.0",
     "info": {
+        "description": "The VO API",
         "version": "0.0.1",
         "title": "VO API"
     },
