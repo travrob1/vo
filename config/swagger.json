@@ -1,0 +1,455 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "The VO API",
+        "version": "0.0.1",
+        "title": "VO API"
+    },
+    "paths": {
+        "/post": {
+            "get": {
+                "description": "Gets `Post` objects.\nOptional query param of **size** determines\nsize of returned array\n",
+                "parameters": [
+                    {
+                        "name": "size",
+                        "in": "query",
+                        "description": "Size of array",
+                        "required": true,
+                        "type": "number",
+                        "format": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "schema": {
+                            "title": "ArrayOfPosts",
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Post"
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "Create a new `tidbit`\n",
+                "parameters": [
+                    {
+                        "name": "tidbit",
+                        "in": "body",
+                        "description": "The Post JSON you want to create.",
+                        "schema": {
+                            "$ref": "#/definitions/Post"
+                        },
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "schema": {
+                            "$ref": "#/definitions/Post"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "parameters": [
+                    {
+                        "name": "tidbit",
+                        "in": "body",
+                        "description": "The Post JSON you want to update",
+                        "schema": {
+                            "$ref": "#/definitions/Post"
+                        },
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Updates the Post"
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/tidbit": {
+            "get": {
+                "description": "Gets `Tidbit` objects.\nOptional query param of **size** determines\nsize of returned array\n",
+                "parameters": [
+                    {
+                        "name": "size",
+                        "in": "query",
+                        "description": "Size of array",
+                        "required": true,
+                        "type": "number",
+                        "format": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "schema": {
+                            "title": "ArrayOfTidbits",
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Tidbit"
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "Create a new `tidbit`\n",
+                "parameters": [
+                    {
+                        "name": "tidbit",
+                        "in": "body",
+                        "description": "The Tidbit JSON you want to post",
+                        "schema": {
+                            "$ref": "#/definitions/Tidbit"
+                        },
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "schema": {
+                            "$ref": "#/definitions/Tidbit"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "parameters": [
+                    {
+                        "name": "tidbit",
+                        "in": "body",
+                        "description": "The Tidbit JSON you want to post",
+                        "schema": {
+                            "$ref": "#/definitions/Tidbit"
+                        },
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Updates the tidbit"
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/comment": {
+            "get": {
+                "description": "Gets `Comment` objects.\nOptional query param of **size** determines\nsize of returned array\n",
+                "parameters": [
+                    {
+                        "name": "size",
+                        "in": "query",
+                        "description": "Size of array",
+                        "required": true,
+                        "type": "number",
+                        "format": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "schema": {
+                            "title": "ArrayOfComments",
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Comment"
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "Create a new `comment`\n",
+                "parameters": [
+                    {
+                        "name": "comment",
+                        "in": "body",
+                        "description": "The Comment JSON you want to post",
+                        "schema": {
+                            "$ref": "#/definitions/Comment"
+                        },
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "schema": {
+                            "$ref": "#/definitions/Comment"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "parameters": [
+                    {
+                        "name": "comment",
+                        "in": "body",
+                        "description": "The Comment JSON you want to post",
+                        "schema": {
+                            "$ref": "#/definitions/Comment"
+                        },
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Updates the comment"
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/profile": {
+            "get": {
+                "description": "Gets `Profile` objects.\nOptional query param of **size** determines\nsize of returned array\n",
+                "parameters": [
+                    {
+                        "name": "size",
+                        "in": "query",
+                        "description": "Size of array",
+                        "required": true,
+                        "type": "number",
+                        "format": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "schema": {
+                            "title": "ArrayOfProfileStuff",
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Profile"
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "Create a new `profile`\n",
+                "parameters": [
+                    {
+                        "name": "profile",
+                        "in": "body",
+                        "description": "The Profile JSON you want to post",
+                        "schema": {
+                            "$ref": "#/definitions/Profile"
+                        },
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "schema": {
+                            "$ref": "#/definitions/Profile"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "parameters": [
+                    {
+                        "name": "profile",
+                        "in": "body",
+                        "description": "The Profile JSON you want to post",
+                        "schema": {
+                            "$ref": "#/definitions/Profile"
+                        },
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Updates the profile"
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "Post": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "description": "Unique identifier representing a specific post."
+                },
+                "title": {
+                    "type": "string",
+                    "description": "title of the post."
+                },
+                "views": {
+                    "type": "integer",
+                    "description": "How many times this post has been displayed to other users."
+                },
+                "ownerId": {
+                    "type": "string",
+                    "description": "identifier of the person who created this post and can make changes.  Note this will always match the owner of the first tidbit."
+                }
+            }
+        },
+        "Tidbit": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "description": "Unique identifier representing a content section within a post.  Could be the original post, or a response to the post."
+                },
+                "content": {
+                    "type": "string",
+                    "description": "content of the tidbit."
+                },
+                "created": {
+                    "type": "string",
+                    "description": "When this tidbit was created.",
+                    "format": "date-time"
+                },
+                "updated": {
+                    "type": "string",
+                    "description": "When this tidbit was updated.",
+                    "format": "date-time"
+                },
+                "votes": {
+                    "type": "integer",
+                    "description": "total of votes, including up and down, for this particular tidbit."
+                },
+                "postId": {
+                    "type": "string",
+                    "description": "identifies which post is associated with this tidbit."
+                },
+                "ownerId": {
+                    "type": "string",
+                    "description": "identifier of the person who created this tidbit and can make changes."
+                }
+            }
+        },
+        "Comment": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "description": "Unique identifier of this comment"
+                },
+                "text": {
+                    "type": "string",
+                    "description": "the comment text"
+                },
+                "created": {
+                    "type": "string",
+                    "description": "When this tidbit was created.",
+                    "format": "date-time"
+                },
+                "updated": {
+                    "type": "string",
+                    "description": "When this tidbit was created.",
+                    "format": "date-time"
+                },
+                "inReferenceToId": {
+                    "type": "string",
+                    "description": "the comment this comment pertains to, or none if this is a top level comment in reference to the tidbit."
+                },
+                "ownerId": {
+                    "type": "string",
+                    "description": "identifier of the person who created this comment and can make changes."
+                }
+            }
+        },
+        "Profile": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "description": "Unique identifier of this profile"
+                },
+                "rank": {
+                    "type": "string",
+                    "description": "the users rank"
+                },
+                "education": {
+                    "type": "string",
+                    "description": "The users education level."
+                },
+                "militaryBranch": {
+                    "type": "string",
+                    "description": "Military Branch of this user."
+                },
+                "userId": {
+                    "type": "string",
+                    "description": "identifier of the person who this profile belongs to."
+                }
+            }
+        },
+        "Error": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "message": {
+                    "type": "string"
+                },
+                "fields": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}
