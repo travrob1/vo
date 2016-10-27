@@ -21,8 +21,8 @@ module.exports = function(app, passport, _) {
 
     // process the login form
     app.post('/login', passport.authenticate('local-login', {
-        successRedirect: '#/login-redirect', // redirect to the secure profile section
-        failureRedirect: '#/', // redirect back to the signup page if there is an error
+        successRedirect: '/#/login-redirect', // redirect to the secure profile section
+        failureRedirect: '/', // redirect back to the signup page if there is an error
         failureFlash: true // allow flash messages
     }));
 
@@ -32,8 +32,8 @@ module.exports = function(app, passport, _) {
 
     // process the signup form
     app.post('/register', passport.authenticate('local-signup', {
-        successRedirect: '#/login-redirect', // redirect to the secure profile section
-        failureRedirect: '#/register', // redirect back to the signup page if there is an error
+        successRedirect: '/#/login-redirect', // redirect to the secure profile section
+        failureRedirect: '/#/register', // redirect back to the signup page if there is an error
         failureFlash: true // allow flash messages
     }));
 
@@ -73,7 +73,7 @@ module.exports = function(app, passport, _) {
     // handle the callback after facebook has authenticated the user
     app.get('/auth/facebook/callback',
         passport.authenticate('facebook', {
-            successRedirect: '#/login-redirect',
+            successRedirect: '/#/login-redirect',
             failureRedirect: '/'
         }));
 
@@ -87,7 +87,7 @@ module.exports = function(app, passport, _) {
     // handle the callback after twitter has authenticated the user
     app.get('/auth/twitter/callback',
         passport.authenticate('twitter', {
-            successRedirect: '#/login-redirect',
+            successRedirect: '/#/login-redirect',
             failureRedirect: '/'
         }));
 
@@ -102,7 +102,7 @@ module.exports = function(app, passport, _) {
     // the callback after google has authenticated the user
     app.get('/auth/google/callback',
         passport.authenticate('google', {
-            successRedirect: '#/login-redirect',
+            successRedirect: '/#/login-redirect',
             failureRedirect: '/'
         }));
 
@@ -117,8 +117,8 @@ module.exports = function(app, passport, _) {
         });
     });
     app.post('/connect/local', passport.authenticate('local-signup', {
-        successRedirect: '#/account', // redirect to the secure profile section
-        failureRedirect: '#/account', // redirect back to the signup page if there is an error
+        successRedirect: '/#/account', // redirect to the secure profile section
+        failureRedirect: '/#/account', // redirect back to the signup page if there is an error
         failureFlash: true // allow flash messages
     }));
 
@@ -132,7 +132,7 @@ module.exports = function(app, passport, _) {
     // handle the callback after facebook has authorized the user
     app.get('/connect/facebook/callback',
         passport.authorize('facebook', {
-            successRedirect: '#/account',
+            successRedirect: '/#/account',
             failureRedirect: '/'
         }));
 
@@ -146,7 +146,7 @@ module.exports = function(app, passport, _) {
     // handle the callback after twitter has authorized the user
     app.get('/connect/twitter/callback',
         passport.authorize('twitter', {
-            successRedirect: '#/account',
+            successRedirect: '/#/account',
             failureRedirect: '/'
         }));
 
@@ -161,7 +161,7 @@ module.exports = function(app, passport, _) {
     // the callback after google has authorized the user
     app.get('/connect/google/callback',
         passport.authorize('google', {
-            successRedirect: '#/account',
+            successRedirect: '/#/account',
             failureRedirect: '/'
         }));
 
@@ -178,7 +178,7 @@ module.exports = function(app, passport, _) {
         user.local.email = undefined;
         user.local.password = undefined;
         user.save(function(err) {
-            res.redirect('#/account');
+            res.redirect('/#/account');
         });
     });
 
@@ -187,7 +187,7 @@ module.exports = function(app, passport, _) {
         var user = req.user;
         user.facebook.token = undefined;
         user.save(function(err) {
-            res.redirect('#/account');
+            res.redirect('/#/account');
         });
     });
 
@@ -196,7 +196,7 @@ module.exports = function(app, passport, _) {
         var user = req.user;
         user.twitter.token = undefined;
         user.save(function(err) {
-            res.redirect('#/account');
+            res.redirect('/#/account');
         });
     });
 
@@ -205,7 +205,7 @@ module.exports = function(app, passport, _) {
         var user = req.user;
         user.google.token = undefined;
         user.save(function(err) {
-            res.redirect('#/account');
+            res.redirect('/#/account');
         });
     });
 
