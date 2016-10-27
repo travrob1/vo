@@ -32,6 +32,7 @@
     "passport-twitter": "~1.0.2",
     "s3fs": "^2.5.0",
     "serve-favicon": "~2.3.0",
+    "swagger-mongoose": "^1.1.2",
     "swaggerize-express": "^4.0.5",
     "uuid": "^2.0.3"
   }

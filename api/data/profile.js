@@ -1,5 +1,6 @@
 'use strict';
 var Mockgen = require('./mockgen.js');
+var Profile = require('../../app/models/swagified.js').Profile;
 /**
  * Operations on /profile
  */
@@ -50,15 +51,12 @@ size of returned array
      */
     post: {
         200: function (req, res, callback) {
-            /**
-             * Using mock data generator module.
-             * Replace this by actual data for the api.
-             */
-            Mockgen().responses({
-                path: '/profile',
-                operation: 'post',
-                response: '200'
-            }, callback);
+            var newProfile = new Profile(req.body);
+            newProfile.save(function(err) {
+                if (err)
+                    throw err;
+                return callback(null, {responses: newProfile});
+            });
         }
     },
     /**
@@ -75,11 +73,15 @@ size of returned array
              * Using mock data generator module.
              * Replace this by actual data for the api.
              */
+            function fakeCallback(a, b, c) {
+                var r = callback(a, b, c);
+                console.log('params', r, a, b, c);
+            }
             Mockgen().responses({
                 path: '/profile',
                 operation: 'put',
                 response: '200'
-            }, callback);
+            }, fakeCallback);
         },
         default: function (req, res, callback) {
             /**

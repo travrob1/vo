@@ -1,5 +1,8 @@
 'use strict';
 var Mockgen = require('./mockgen.js');
+var Mongeese = require('./mongeese.js');
+var Post = require('../../app/models/swagified.js').Post;
+
 /**
  * Operations on /post
  */
@@ -49,17 +52,7 @@ size of returned array
      * operationId: 
      */
     post: {
-        200: function (req, res, callback) {
-            /**
-             * Using mock data generator module.
-             * Replace this by actual data for the api.
-             */
-            Mockgen().responses({
-                path: '/post',
-                operation: 'post',
-                response: '200'
-            }, callback);
-        }
+        200: Mongeese.verbPost(Post)
     },
     /**
      * summary: 
