@@ -61,6 +61,13 @@ app.use(express.static(path.join(__dirname, '/.build')));
 app.use('/swagger-ui', express.static('api/swagger-ui-2.2.6/dist'));
 app.get('/config/swagger.json', function(req, res) { res.sendFile(__dirname + '/config/swagger.json'); });
 
+var Swaggerize = require('swaggerize-express');
+
+app.use(Swaggerize({
+    api: path.resolve('./api/config/swagger.json'),
+    handlers: path.resolve('./api/handlers')
+}));
+
 // routes ======================================================================
 require('./app/auth-routes.js')(app, passport, _); // load our routes and pass in our app and fully configured passport
 require('./app/app-routes.js')(app, _); 
