@@ -1,5 +1,6 @@
 'use strict';
 var Mockgen = require('./mockgen.js');
+var Mongeese = require('./mongeese.js');
 var Profile = require('../../app/models/swagified.js').Profile;
 /**
  * Operations on /profile
@@ -17,18 +18,8 @@ size of returned array
      * operationId: 
      */
     get: {
-        200: function (req, res, callback) {
-            /**
-             * Using mock data generator module.
-             * Replace this by actual data for the api.
-             */
-            Mockgen().responses({
-                path: '/profile',
-                operation: 'get',
-                response: '200'
-            }, callback);
-        },
-        default: function (req, res, callback) {
+        200: Mongeese.verbGetById(Profile),
+        unUsed: function (req, res, callback) {
             /**
              * Using mock data generator module.
              * Replace this by actual data for the api.
@@ -50,14 +41,7 @@ size of returned array
      * operationId: 
      */
     post: {
-        200: function (req, res, callback) {
-            var newProfile = new Profile(req.body);
-            newProfile.save(function(err) {
-                if (err)
-                    throw err;
-                return callback(null, {responses: newProfile});
-            });
-        }
+        200: Mongeese.verbPost(Profile)
     },
     /**
      * summary: 

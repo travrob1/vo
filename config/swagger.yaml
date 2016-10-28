@@ -1,4 +1,3 @@
-# Example YAML to get you started quickly.
 # Be aware that YAML has indentation based scoping.
 # Code completion support is available so start typing for available options.
 swagger: '2.0'
@@ -12,6 +11,10 @@ info:
 paths:
   /post:
     get:
+      tags:
+        - VO
+      produces:
+        - application/json
       description: |
         Gets `Post` objects.
         Optional query param of **size** determines
@@ -42,6 +45,10 @@ paths:
           schema:
             $ref: '#/definitions/Error'
     post:
+      tags:
+        - VO
+      produces:
+        - application/json
       description: |
         Create a new `tidbit`
       parameters:
@@ -57,6 +64,10 @@ paths:
           schema:
               $ref: '#/definitions/Post'
     put:
+      tags:
+        - VO
+      produces:
+        - application/json
       parameters:
         - name: tidbit
           in: body
@@ -71,8 +82,37 @@ paths:
           description: Unexpected error
           schema:
             $ref: '#/definitions/Error'
+  /posts/{postId}:
+    get:
+      tags:
+        - VO
+      summary: Find profile by ID
+      description: For administrators to view any user profile
+      operationId: getPetById
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: postId
+          description: ID of post that needs to be fetched
+          required: true
+          type: string
+          format: id
+      responses:
+        "404":
+          description: Post not found
+        "200":
+          description: successful operation
+          schema:
+            $ref: "#/definitions/Post"
+        "400":
+          description: Invalid ID supplied
   /tidbit:
     get:
+      tags:
+        - VO
+      produces:
+        - application/json
       description: |
         Gets `Tidbit` objects.
         Optional query param of **size** determines
@@ -103,6 +143,10 @@ paths:
           schema:
             $ref: '#/definitions/Error'
     post:
+      tags:
+        - VO
+      produces:
+        - application/json
       description: |
         Create a new `tidbit`
       parameters:
@@ -118,6 +162,10 @@ paths:
           schema:
               $ref: '#/definitions/Tidbit'
     put:
+      tags:
+        - VO
+      produces:
+        - application/json
       parameters:
         - name: tidbit
           in: body
@@ -134,6 +182,10 @@ paths:
             $ref: '#/definitions/Error'
   /comment:
     get:
+      tags:
+        - VO
+      produces:
+        - application/json
       description: |
         Gets `Comment` objects.
         Optional query param of **size** determines
@@ -164,6 +216,10 @@ paths:
           schema:
             $ref: '#/definitions/Error'
     post:
+      tags:
+        - VO
+      produces:
+        - application/json
       description: |
         Create a new `comment`
       parameters:
@@ -179,6 +235,10 @@ paths:
           schema:
               $ref: '#/definitions/Comment'
     put:
+      tags:
+        - VO
+      produces:
+        - application/json
       parameters:
         - name: comment
           in: body
@@ -195,6 +255,10 @@ paths:
             $ref: '#/definitions/Error'
   /profile:
     get:
+      tags:
+        - VO
+      produces:
+        - application/json
       description: |
         Gets `Profile` objects.
         Optional query param of **size** determines
@@ -225,6 +289,10 @@ paths:
           schema:
             $ref: '#/definitions/Error'
     post:
+      tags:
+        - VO
+      produces:
+        - application/json
       description: |
         Create a new `profile`
       parameters:
@@ -240,6 +308,10 @@ paths:
           schema:
               $ref: '#/definitions/Profile'
     put:
+      tags:
+        - VO
+      produces:
+        - application/json
       parameters:
         - name: profile
           in: body
