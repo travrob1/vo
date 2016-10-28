@@ -1,7 +1,7 @@
 'use strict';
 var Mockgen = require('./mockgen.js');
 var Mongeese = require('./mongeese.js');
-var Tidbit = require('../../app/models/swagified.js').Tidbit;
+var Tidbit = require('../../app/models/swagifiedApi.js').Tidbit;
 
 /**
  * Operations on /tidbit

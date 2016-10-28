@@ -34,17 +34,16 @@ function verbGetCount(req, Model, callback) {
     });
 }
 
-    
-function verbGetById(req, Model, callback) {
-    var instance = new Model();
-    console.log(req);
-    instance.findOne({'_id': 'asdf'}, function(err, existingInstance) {
-        if (err) {
-            return callback(err);
-        } else {
-            return callback(null, {responses: existingInstance});
-        }
-    });
+function verbGetById(Model) {
+    return function (req, res, callback) {
+        Model.findOne({'_id': req.params.id}, function(err, existingInstance) {
+            if (err) {
+                return callback(err);
+            } else {
+                return callback(null, {responses: existingInstance});
+            }
+        });
+    }
 }
 
 module.exports = {

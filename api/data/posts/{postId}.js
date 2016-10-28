@@ -1,5 +1,8 @@
 'use strict';
 var Mockgen = require('../mockgen.js');
+var Mongeese = require('../mongeese.js');
+var Post = require('../../../app/models/swagifiedApi.js').Post;
+
 /**
  * Operations on /posts/{postId}
  */
@@ -13,17 +16,7 @@ module.exports = {
      * operationId: getPetById
      */
     get: {
-        200: function (req, res, callback) {
-            /**
-             * Using mock data generator module.
-             * Replace this by actual data for the api.
-             */
-            Mockgen().responses({
-                path: '/posts/{postId}',
-                operation: 'get',
-                response: '200'
-            }, callback);
-        },
+        200: Mongeese.verbGetById(Post),
         400: function (req, res, callback) {
             /**
              * Using mock data generator module.

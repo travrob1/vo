@@ -1,7 +1,8 @@
 'use strict';
 var Mockgen = require('./mockgen.js');
 var Mongeese = require('./mongeese.js');
-var Profile = require('../../app/models/swagified.js').Profile;
+var Profile = require('../../app/models/swagifiedApi.js').Profile;
+
 /**
  * Operations on /profile
  */
