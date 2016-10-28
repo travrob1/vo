@@ -11,7 +11,7 @@ Optional query param of **size** determines
 size of returned array
 
      * parameters: size
-     * produces: 
+     * produces: application/json
      * responses: 200, default
      * operationId: 
      */
@@ -44,7 +44,7 @@ size of returned array
      * description: Create a new `comment`
 
      * parameters: comment
-     * produces: 
+     * produces: application/json
      * responses: 200
      * operationId: 
      */
@@ -65,7 +65,7 @@ size of returned array
      * summary: 
      * description: 
      * parameters: comment
-     * produces: 
+     * produces: application/json
      * responses: 200, default
      * operationId: 
      */

@@ -7,6 +7,12 @@
     "paths": {
         "/post": {
             "get": {
+                "tags": [
+                    "VO"
+                ],
+                "produces": [
+                    "application/json"
+                ],
                 "description": "Gets `Post` objects.\nOptional query param of **size** determines\nsize of returned array\n",
                 "parameters": [
                     {
@@ -38,6 +44,12 @@
                 }
             },
             "post": {
+                "tags": [
+                    "VO"
+                ],
+                "produces": [
+                    "application/json"
+                ],
                 "description": "Create a new `tidbit`\n",
                 "parameters": [
                     {
@@ -60,6 +72,12 @@
                 }
             },
             "put": {
+                "tags": [
+                    "VO"
+                ],
+                "produces": [
+                    "application/json"
+                ],
                 "parameters": [
                     {
                         "name": "tidbit",
@@ -84,8 +102,51 @@
                 }
             }
         },
+        "/posts/{postId}": {
+            "get": {
+                "tags": [
+                    "VO"
+                ],
+                "summary": "Find profile by ID",
+                "description": "For administrators to view any user profile",
+                "operationId": "getPetById",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "postId",
+                        "description": "ID of post that needs to be fetched",
+                        "required": true,
+                        "type": "string",
+                        "format": "id"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/Post"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid ID supplied"
+                    },
+                    "404": {
+                        "description": "Post not found"
+                    }
+                }
+            }
+        },
         "/tidbit": {
             "get": {
+                "tags": [
+                    "VO"
+                ],
+                "produces": [
+                    "application/json"
+                ],
                 "description": "Gets `Tidbit` objects.\nOptional query param of **size** determines\nsize of returned array\n",
                 "parameters": [
                     {
@@ -117,6 +178,12 @@
                 }
             },
             "post": {
+                "tags": [
+                    "VO"
+                ],
+                "produces": [
+                    "application/json"
+                ],
                 "description": "Create a new `tidbit`\n",
                 "parameters": [
                     {
@@ -139,6 +206,12 @@
                 }
             },
             "put": {
+                "tags": [
+                    "VO"
+                ],
+                "produces": [
+                    "application/json"
+                ],
                 "parameters": [
                     {
                         "name": "tidbit",
@@ -165,6 +238,12 @@
         },
         "/comment": {
             "get": {
+                "tags": [
+                    "VO"
+                ],
+                "produces": [
+                    "application/json"
+                ],
                 "description": "Gets `Comment` objects.\nOptional query param of **size** determines\nsize of returned array\n",
                 "parameters": [
                     {
@@ -196,6 +275,12 @@
                 }
             },
             "post": {
+                "tags": [
+                    "VO"
+                ],
+                "produces": [
+                    "application/json"
+                ],
                 "description": "Create a new `comment`\n",
                 "parameters": [
                     {
@@ -218,6 +303,12 @@
                 }
             },
             "put": {
+                "tags": [
+                    "VO"
+                ],
+                "produces": [
+                    "application/json"
+                ],
                 "parameters": [
                     {
                         "name": "comment",
@@ -244,6 +335,12 @@
         },
         "/profile": {
             "get": {
+                "tags": [
+                    "VO"
+                ],
+                "produces": [
+                    "application/json"
+                ],
                 "description": "Gets `Profile` objects.\nOptional query param of **size** determines\nsize of returned array\n",
                 "parameters": [
                     {
@@ -275,6 +372,12 @@
                 }
             },
             "post": {
+                "tags": [
+                    "VO"
+                ],
+                "produces": [
+                    "application/json"
+                ],
                 "description": "Create a new `profile`\n",
                 "parameters": [
                     {
@@ -297,6 +400,12 @@
                 }
             },
             "put": {
+                "tags": [
+                    "VO"
+                ],
+                "produces": [
+                    "application/json"
+                ],
                 "parameters": [
                     {
                         "name": "profile",

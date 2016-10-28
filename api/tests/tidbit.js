@@ -31,7 +31,7 @@ Optional query param of **size** determines
 size of returned array
 
          * parameters: size
-         * produces: 
+         * produces: application/json
          * responses: 200, default
          */
         t.test('test  get operation', function (t) {
@@ -81,7 +81,7 @@ size of returned array
          * description: Create a new `tidbit`
 
          * parameters: tidbit
-         * produces: 
+         * produces: application/json
          * responses: 200
          */
         t.test('test  post operation', function (t) {
@@ -130,7 +130,7 @@ size of returned array
          * summary: 
          * description: 
          * parameters: tidbit
-         * produces: 
+         * produces: application/json
          * responses: 200, default
          */
         t.test('test  put operation', function (t) {
