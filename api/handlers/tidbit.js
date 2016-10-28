@@ -11,7 +11,7 @@ Optional query param of **size** determines
 size of returned array
 
      * parameters: size
-     * produces: 
+     * produces: application/json
      * responses: 200, default
      */
     get: function (req, res, next) {
@@ -34,7 +34,7 @@ size of returned array
      * description: Create a new `tidbit`
 
      * parameters: tidbit
-     * produces: 
+     * produces: application/json
      * responses: 200
      */
     post: function (req, res, next) {
@@ -56,7 +56,7 @@ size of returned array
      * summary: 
      * description: 
      * parameters: tidbit
-     * produces: 
+     * produces: application/json
      * responses: 200, default
      */
     put: function (req, res, next) {

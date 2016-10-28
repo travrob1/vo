@@ -1,14 +1,14 @@
 {
-    "name": "vo-api",
+    "name": "api",
     "description": "",
     "version": "1.0.0",
-    "author": "Chris David <vo-api@sky.chrisdavid.com>",
+    "author": "Chris David <voapi@sky.chrisdavid.com>",
     "contributors": [],
     "repository": {
         "type": "git",
-        "url": "git://github.com/tongfa/vo-api.git"
+        "url": "git://github.com/tongfa/api.git"
     },
-    "bugs": "http://github.com/tongfa/vo-api/issues",
+    "bugs": "http://github.com/tongfa/api/issues",
     "publishConfig": {
         "registry": "https://registry.npmjs.org"
     },
