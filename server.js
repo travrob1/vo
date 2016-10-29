@@ -23,12 +23,22 @@ var _ = require('lodash');
 
 var configDB = require('./config/database.js');
 
+app.use('/swagger-ui', express.static('api/swagger-ui-2.2.6/dist'));
+app.get('/config/swagger.json', function(req, res) { res.sendFile(__dirname + '/config/swagger.json'); });
 
+var Swaggerize = require('swaggerize-express');
+
+app.use(Swaggerize({
+    api: path.resolve('./api/config/swagger.json'),
+    handlers: path.resolve('./api/handlers')
+}));
 
 // configuration ===============================================================
 mongoose.connect(configDB.url); // connect to our database
 
 require('./config/passport')(passport); // pass passport for configuration
+
+
 
 // set up our express application
 app.use(logger('dev')); // log every request to the console
@@ -59,15 +69,7 @@ app.use(express.static(path.join(__dirname, '/bower_components')));
 app.use(express.static(path.join(__dirname, '/node_modules')));
 app.use(express.static(path.join(__dirname, '/.build')));
 
-app.use('/swagger-ui', express.static('api/swagger-ui-2.2.6/dist'));
-app.get('/config/swagger.json', function(req, res) { res.sendFile(__dirname + '/config/swagger.json'); });
 
-var Swaggerize = require('swaggerize-express');
-
-app.use(Swaggerize({
-    api: path.resolve('./api/config/swagger.json'),
-    handlers: path.resolve('./api/handlers')
-}));
 
 // routes ======================================================================
 require('./app/auth-routes.js')(app, passport, _); // load our routes and pass in our app and fully configured passport
