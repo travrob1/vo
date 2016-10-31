@@ -588,3 +588,9 @@ disabled look for disabled choices in the results dropdown
     border: 1px solid grey;
     padding: 12px 10px;
 }
+
+#ui-select-match-photo {
+    max-height: 25px;
+    margin-top: -3px;
+    margin-right: 5px;
+}

@@ -23,7 +23,7 @@
 
         <label for="militaryRank">What was your rank{{militaryBranch | rankBranch}}?</label>
         <ui-select ng-model="rank.selected" theme="select2" ng-disabled="disabled">
-            <ui-select-match placeholder="-Select-">{{$select.selected.rank}}</ui-select-match>
+            <ui-select-match placeholder="-Select-"><img id="ui-select-match-photo" ng-src="{{ $select.selected.url }}" />{{$select.selected.rank}}</ui-select-match>
             <ui-select-choices repeat="rank in rank_list | rankFilter: {rank: $select.search, level: $select.search}"">
               <div ng-bind-html="rank.level" style="display: inline"></div>
               <img ng-src="{{ rank.url }}" />
