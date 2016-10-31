@@ -74,7 +74,7 @@ angular.module('app').controller('accountCtrl',function($scope, $state, $http, A
     $scope.rank = {};
     $scope.rank.selected = '';
     $scope.rank_list = [
-        {'level': 'E1','rank': 'Private', 'url': ''},
+        {'level': 'E1','rank': 'Private', 'url': 'images/insignia/army/e1.png'},
         {'level': 'E2','rank': 'Private E-2', 'url': 'images/insignia/army/e2.gif'},
         {'level': 'E3','rank': 'Private First Class', 'url': 'images/insignia/army/e3.png'},
         {'level': 'E4','rank': 'Corporal', 'url': 'images/insignia/army/e4-cpl.png'},
