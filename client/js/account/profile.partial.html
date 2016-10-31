@@ -22,10 +22,14 @@
         </select>
 
         <label for="militaryRank">What was your rank{{militaryBranch | rankBranch}}?</label>
-        <select class="input-block-level">
-            <option value="">-Select-</option>
-            
-        </select>
+        <ui-select ng-model="rank.selected" theme="select2" ng-disabled="disabled">
+            <ui-select-match placeholder="-Select-">{{$select.selected.rank}}</ui-select-match>
+            <ui-select-choices repeat="rank in rank_list | rankFilter: {rank: $select.search, level: $select.search}"">
+              <div ng-bind-html="rank.level" style="display: inline"></div>
+              <img ng-src="{{ rank.url }}" />
+              <div ng-bind-html="rank.rank" style="display: inline"></div>
+            </ui-select-choices>
+          </ui-select>
         <br>
         <br>
         <button type="submit" class="btn btn-primary btn-large pull-right">Save</button>
