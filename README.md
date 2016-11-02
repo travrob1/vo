@@ -1,6 +1,7 @@
 # Veteran Opportunities
 
 ## Instructions
+Repo - `https://github.com/krakenjs/swaggerize-express`
 
 1. Clone the repo: `git clone git@bitbucket.org:travis_rosoin/vo.git`
 2. Install packages: `npm install`

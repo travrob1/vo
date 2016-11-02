@@ -1,17 +1,17 @@
 'use strict';
-var dataProvider = require('../../data/posts/{id}.js');
+var dataProvider = require('../../data/profiles/{id}.js');
 /**
- * Operations on /posts/{id}
+ * Operations on /profiles/{id}
  */
 module.exports = {
     /**
-     * summary: Find posts by ID
-     * description: For administrators to view any user post
+     * summary: Find profiles by ID
+     * description: For administrators to view any user profile
      * parameters: id
      * produces: application/json
      * responses: 200, default
      */
-    get: function getPostById(req, res, next) {
+    get: function getProfileById(req, res, next) {
         /**
          * Get the data for response 200
          * For response `default` status 200 is used.

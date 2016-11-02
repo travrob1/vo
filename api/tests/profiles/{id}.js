@@ -8,9 +8,9 @@ var Request = require('supertest');
 var Mockgen = require('../../data/mockgen.js');
 var Parser = require('swagger-parser');
 /**
- * Test for /posts/{id}
+ * Test for /profiles/{id}
  */
-Test('/posts/{id}', function (t) {
+Test('/profiles/{id}', function (t) {
     var apiPath = Path.resolve(__dirname, '../../config/swagger.json');
     var App = Express();
     App.use(BodyParser.json());
@@ -25,15 +25,15 @@ Test('/posts/{id}', function (t) {
         t.error(err, 'No parse error');
         t.ok(api, 'Valid swagger api');
         /**
-         * summary: Find posts by ID
-         * description: For administrators to view any user post
+         * summary: Find profiles by ID
+         * description: For administrators to view any user profile
          * parameters: id
          * produces: application/json
          * responses: 200, default
          */
-        t.test('test getPostById get operation', function (t) {
+        t.test('test getProfileById get operation', function (t) {
             Mockgen().requests({
-                path: '/posts/{id}',
+                path: '/profiles/{id}',
                 operation: 'get'
             }, function (err, mock) {
                 var request;
@@ -63,7 +63,7 @@ Test('/posts/{id}', function (t) {
                     t.error(err, 'No error');
                     t.ok(res.statusCode === 200, 'Ok response status');
                     var Validator = require('is-my-json-valid');
-                    var validate = Validator(api.paths['/posts/{id}']['get']['responses']['200']['schema']);
+                    var validate = Validator(api.paths['/profiles/{id}']['get']['responses']['200']['schema']);
                     var response = res.body;
                     if (Object.keys(response).length <= 0) {
                         response = res.text;
@@ -82,7 +82,7 @@ Test('/posts/{id}', function (t) {
          */
         t.test('test  put operation', function (t) {
             Mockgen().requests({
-                path: '/posts/{id}',
+                path: '/profiles/{id}',
                 operation: 'put'
             }, function (err, mock) {
                 var request;

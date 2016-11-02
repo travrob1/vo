@@ -1,16 +1,16 @@
 'use strict';
-var Mockgen = require('../mockgen.js');
+var Mockgen = require('../../../mockgen.js');
 /**
- * Operations on /posts/{id}
+ * Operations on /tidbits/{id}/comments/{cid}
  */
 module.exports = {
     /**
-     * summary: Find posts by ID
+     * summary: Find comments by ID
      * description: For administrators to view any user post
-     * parameters: id
+     * parameters: id, cid
      * produces: application/json
      * responses: 200, default
-     * operationId: getPostById
+     * operationId: getCommentById
      */
     get: {
         200: function (req, res, callback) {
@@ -19,7 +19,7 @@ module.exports = {
              * Replace this by actual data for the api.
              */
             Mockgen().responses({
-                path: '/posts/{id}',
+                path: '/tidbits/{id}/comments/{cid}',
                 operation: 'get',
                 response: '200'
             }, callback);
@@ -30,7 +30,7 @@ module.exports = {
              * Replace this by actual data for the api.
              */
             Mockgen().responses({
-                path: '/posts/{id}',
+                path: '/tidbits/{id}/comments/{cid}',
                 operation: 'get',
                 response: 'default'
             }, callback);
@@ -39,7 +39,7 @@ module.exports = {
     /**
      * summary: 
      * description: 
-     * parameters: id, data
+     * parameters: id, cid, data
      * produces: application/json
      * responses: 200, default
      * operationId: 
@@ -51,7 +51,7 @@ module.exports = {
              * Replace this by actual data for the api.
              */
             Mockgen().responses({
-                path: '/posts/{id}',
+                path: '/tidbits/{id}/comments/{cid}',
                 operation: 'put',
                 response: '200'
             }, callback);
@@ -62,7 +62,7 @@ module.exports = {
              * Replace this by actual data for the api.
              */
             Mockgen().responses({
-                path: '/posts/{id}',
+                path: '/tidbits/{id}/comments/{cid}',
                 operation: 'put',
                 response: 'default'
             }, callback);

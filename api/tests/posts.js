@@ -5,13 +5,13 @@ var BodyParser = require('body-parser');
 var Swaggerize = require('swaggerize-express');
 var Path = require('path');
 var Request = require('supertest');
-var Mockgen = require('../../data/mockgen.js');
+var Mockgen = require('../data/mockgen.js');
 var Parser = require('swagger-parser');
 /**
- * Test for /posts/{id}
+ * Test for /posts
  */
-Test('/posts/{id}', function (t) {
-    var apiPath = Path.resolve(__dirname, '../../config/swagger.json');
+Test('/posts', function (t) {
+    var apiPath = Path.resolve(__dirname, '../config/swagger.json');
     var App = Express();
     App.use(BodyParser.json());
     App.use(BodyParser.urlencoded({
@@ -19,21 +19,24 @@ Test('/posts/{id}', function (t) {
     }));
     App.use(Swaggerize({
         api: apiPath,
-        handlers: Path.resolve(__dirname, '../../handlers')
+        handlers: Path.resolve(__dirname, '../handlers')
     }));
     Parser.validate(apiPath, function (err, api) {
         t.error(err, 'No parse error');
         t.ok(api, 'Valid swagger api');
         /**
-         * summary: Find posts by ID
-         * description: For administrators to view any user post
-         * parameters: id
+         * summary: 
+         * description: Gets `Post` objects.
+Optional query param of **size** determines
+size of returned array
+
+         * parameters: size
          * produces: application/json
          * responses: 200, default
          */
-        t.test('test getPostById get operation', function (t) {
+        t.test('test  get operation', function (t) {
             Mockgen().requests({
-                path: '/posts/{id}',
+                path: '/posts',
                 operation: 'get'
             }, function (err, mock) {
                 var request;
@@ -63,7 +66,7 @@ Test('/posts/{id}', function (t) {
                     t.error(err, 'No error');
                     t.ok(res.statusCode === 200, 'Ok response status');
                     var Validator = require('is-my-json-valid');
-                    var validate = Validator(api.paths['/posts/{id}']['get']['responses']['200']['schema']);
+                    var validate = Validator(api.paths['/posts']['get']['responses']['200']['schema']);
                     var response = res.body;
                     if (Object.keys(response).length <= 0) {
                         response = res.text;
@@ -75,15 +78,16 @@ Test('/posts/{id}', function (t) {
             });
         });/**
          * summary: 
-         * description: 
-         * parameters: id, data
+         * description: Create a new `tidbit`
+
+         * parameters: data
          * produces: application/json
-         * responses: 200, default
+         * responses: 200
          */
-        t.test('test  put operation', function (t) {
+        t.test('test  post operation', function (t) {
             Mockgen().requests({
-                path: '/posts/{id}',
-                operation: 'put'
+                path: '/posts',
+                operation: 'post'
             }, function (err, mock) {
                 var request;
                 t.error(err);
@@ -92,7 +96,7 @@ Test('/posts/{id}', function (t) {
                 //Get the resolved path from mock request
                 //Mock request Path templates({}) are resolved using path parameters
                 request = Request(App)
-                    .put('' + mock.request.path);
+                    .post('' + mock.request.path);
                 if (mock.request.body) {
                     //Send the request body
                     request = request.send(mock.request.body);
@@ -111,6 +115,14 @@ Test('/posts/{id}', function (t) {
                 request.end(function (err, res) {
                     t.error(err, 'No error');
                     t.ok(res.statusCode === 200, 'Ok response status');
+                    var Validator = require('is-my-json-valid');
+                    var validate = Validator(api.paths['/posts']['post']['responses']['200']['schema']);
+                    var response = res.body;
+                    if (Object.keys(response).length <= 0) {
+                        response = res.text;
+                    }
+                    t.ok(validate(response), 'Valid response');
+                    t.error(validate.errors, 'No validation errors');
                     t.end();
                 });
             });

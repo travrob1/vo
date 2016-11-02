@@ -1,17 +1,17 @@
 'use strict';
-var dataProvider = require('../../data/posts/{id}.js');
+var dataProvider = require('../../../../data/tidbits/{id}/comments/{cid}.js');
 /**
- * Operations on /posts/{id}
+ * Operations on /tidbits/{id}/comments/{cid}
  */
 module.exports = {
     /**
-     * summary: Find posts by ID
+     * summary: Find comments by ID
      * description: For administrators to view any user post
-     * parameters: id
+     * parameters: id, cid
      * produces: application/json
      * responses: 200, default
      */
-    get: function getPostById(req, res, next) {
+    get: function getCommentById(req, res, next) {
         /**
          * Get the data for response 200
          * For response `default` status 200 is used.
@@ -29,7 +29,7 @@ module.exports = {
     /**
      * summary: 
      * description: 
-     * parameters: id, data
+     * parameters: id, cid, data
      * produces: application/json
      * responses: 200, default
      */
