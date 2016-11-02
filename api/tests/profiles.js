@@ -80,7 +80,7 @@ size of returned array
          * summary: 
          * description: Create a new `profile`
 
-         * parameters: data
+         * parameters: profile
          * produces: application/json
          * responses: 200
          */
