@@ -1,17 +1,20 @@
 'use strict';
-var dataProvider = require('../../data/posts/{id}.js');
+var dataProvider = require('../../../data/tidbits/{id}/comments.js');
 /**
- * Operations on /posts/{id}
+ * Operations on /tidbits/{id}/comments
  */
 module.exports = {
     /**
-     * summary: Find posts by ID
-     * description: For administrators to view any user post
-     * parameters: id
+     * summary: 
+     * description: Gets `Comment` objects.
+Optional query param of **size** determines
+size of returned array
+
+     * parameters: id, size
      * produces: application/json
      * responses: 200, default
      */
-    get: function getPostById(req, res, next) {
+    get: function (req, res, next) {
         /**
          * Get the data for response 200
          * For response `default` status 200 is used.
@@ -28,18 +31,19 @@ module.exports = {
     },
     /**
      * summary: 
-     * description: 
+     * description: Create a new `comment`
+
      * parameters: id, data
      * produces: application/json
-     * responses: 200, default
+     * responses: 200
      */
-    put: function (req, res, next) {
+    post: function (req, res, next) {
         /**
          * Get the data for response 200
          * For response `default` status 200 is used.
          */
         var status = 200;
-        var provider = dataProvider['put']['200'];
+        var provider = dataProvider['post']['200'];
         provider(req, res, function (err, data) {
             if (err) {
                 next(err);

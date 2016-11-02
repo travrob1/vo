@@ -1,16 +1,16 @@
 'use strict';
-var Mockgen = require('../mockgen.js');
+var Mockgen = require('../../../mockgen.js');
 /**
- * Operations on /posts/{id}
+ * Operations on /posts/{id}/tidbits/{tid}
  */
 module.exports = {
     /**
-     * summary: Find posts by ID
+     * summary: Find tidbits by ID
      * description: For administrators to view any user post
-     * parameters: id
+     * parameters: id, tid
      * produces: application/json
      * responses: 200, default
-     * operationId: getPostById
+     * operationId: getTidbitById
      */
     get: {
         200: function (req, res, callback) {
@@ -19,7 +19,7 @@ module.exports = {
              * Replace this by actual data for the api.
              */
             Mockgen().responses({
-                path: '/posts/{id}',
+                path: '/posts/{id}/tidbits/{tid}',
                 operation: 'get',
                 response: '200'
             }, callback);
@@ -30,7 +30,7 @@ module.exports = {
              * Replace this by actual data for the api.
              */
             Mockgen().responses({
-                path: '/posts/{id}',
+                path: '/posts/{id}/tidbits/{tid}',
                 operation: 'get',
                 response: 'default'
             }, callback);
@@ -39,7 +39,7 @@ module.exports = {
     /**
      * summary: 
      * description: 
-     * parameters: id, data
+     * parameters: id, tid, data
      * produces: application/json
      * responses: 200, default
      * operationId: 
@@ -51,7 +51,7 @@ module.exports = {
              * Replace this by actual data for the api.
              */
             Mockgen().responses({
-                path: '/posts/{id}',
+                path: '/posts/{id}/tidbits/{tid}',
                 operation: 'put',
                 response: '200'
             }, callback);
@@ -62,7 +62,7 @@ module.exports = {
              * Replace this by actual data for the api.
              */
             Mockgen().responses({
-                path: '/posts/{id}',
+                path: '/posts/{id}/tidbits/{tid}',
                 operation: 'put',
                 response: 'default'
             }, callback);

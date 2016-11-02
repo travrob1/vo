@@ -5,7 +5,7 @@
         "title": "VO API"
     },
     "paths": {
-        "/post": {
+        "/posts": {
             "get": {
                 "tags": [
                     "VO"
@@ -53,7 +53,7 @@
                 "description": "Create a new `tidbit`\n",
                 "parameters": [
                     {
-                        "name": "tidbit",
+                        "name": "data",
                         "in": "body",
                         "description": "The Post JSON you want to create.",
                         "schema": {
@@ -70,36 +70,6 @@
                         }
                     }
                 }
-            },
-            "put": {
-                "tags": [
-                    "VO"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "name": "tidbit",
-                        "in": "body",
-                        "description": "The Post JSON you want to update",
-                        "schema": {
-                            "$ref": "#/definitions/Post"
-                        },
-                        "required": true
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Updates the Post"
-                    },
-                    "default": {
-                        "description": "Unexpected error",
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }
-                }
             }
         },
         "/posts/{id}": {
@@ -107,8 +77,8 @@
                 "tags": [
                     "VO"
                 ],
-                "summary": "Find profile by ID",
-                "description": "For administrators to view any user profile",
+                "summary": "Find posts by ID",
+                "description": "For administrators to view any user post",
                 "operationId": "getPostById",
                 "produces": [
                     "application/json"
@@ -137,9 +107,47 @@
                         }
                     }
                 }
+            },
+            "put": {
+                "tags": [
+                    "VO"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "description": "ID of post that needs to be fetched",
+                        "required": true,
+                        "type": "string",
+                        "format": "id"
+                    },
+                    {
+                        "name": "data",
+                        "in": "body",
+                        "description": "The Post JSON you want to update",
+                        "schema": {
+                            "$ref": "#/definitions/Post"
+                        },
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Updates the Post"
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
             }
         },
-        "/tidbit": {
+        "/posts/{id}/tidbits": {
             "get": {
                 "tags": [
                     "VO"
@@ -149,6 +157,14 @@
                 ],
                 "description": "Gets `Tidbit` objects.\nOptional query param of **size** determines\nsize of returned array\n",
                 "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "description": "ID of post that needs to be fetched",
+                        "required": true,
+                        "type": "string",
+                        "format": "id"
+                    },
                     {
                         "name": "size",
                         "in": "query",
@@ -187,7 +203,15 @@
                 "description": "Create a new `tidbit`\n",
                 "parameters": [
                     {
-                        "name": "tidbit",
+                        "in": "path",
+                        "name": "id",
+                        "description": "ID of post that needs to be fetched",
+                        "required": true,
+                        "type": "string",
+                        "format": "id"
+                    },
+                    {
+                        "name": "data",
                         "in": "body",
                         "description": "The Tidbit JSON you want to post",
                         "schema": {
@@ -204,6 +228,51 @@
                         }
                     }
                 }
+            }
+        },
+        "/posts/{id}/tidbits/{tid}": {
+            "get": {
+                "tags": [
+                    "VO"
+                ],
+                "summary": "Find tidbits by ID",
+                "description": "For administrators to view any user post",
+                "operationId": "getTidbitById",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "description": "ID of post that needs to be fetched",
+                        "required": true,
+                        "type": "string",
+                        "format": "id"
+                    },
+                    {
+                        "in": "path",
+                        "name": "tid",
+                        "description": "ID of post that needs to be fetched",
+                        "required": true,
+                        "type": "string",
+                        "format": "id"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/Profile"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
             },
             "put": {
                 "tags": [
@@ -214,7 +283,23 @@
                 ],
                 "parameters": [
                     {
-                        "name": "tidbit",
+                        "in": "path",
+                        "name": "id",
+                        "description": "ID of post that needs to be fetched",
+                        "required": true,
+                        "type": "string",
+                        "format": "id"
+                    },
+                    {
+                        "in": "path",
+                        "name": "tid",
+                        "description": "ID of post that needs to be fetched",
+                        "required": true,
+                        "type": "string",
+                        "format": "id"
+                    },
+                    {
+                        "name": "data",
                         "in": "body",
                         "description": "The Tidbit JSON you want to post",
                         "schema": {
@@ -236,7 +321,7 @@
                 }
             }
         },
-        "/comment": {
+        "/tidbits/{id}/comments": {
             "get": {
                 "tags": [
                     "VO"
@@ -246,6 +331,14 @@
                 ],
                 "description": "Gets `Comment` objects.\nOptional query param of **size** determines\nsize of returned array\n",
                 "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "description": "ID of post that needs to be fetched",
+                        "required": true,
+                        "type": "string",
+                        "format": "id"
+                    },
                     {
                         "name": "size",
                         "in": "query",
@@ -284,7 +377,15 @@
                 "description": "Create a new `comment`\n",
                 "parameters": [
                     {
-                        "name": "comment",
+                        "in": "path",
+                        "name": "id",
+                        "description": "ID of post that needs to be fetched",
+                        "required": true,
+                        "type": "string",
+                        "format": "id"
+                    },
+                    {
+                        "name": "data",
                         "in": "body",
                         "description": "The Comment JSON you want to post",
                         "schema": {
@@ -301,6 +402,51 @@
                         }
                     }
                 }
+            }
+        },
+        "/tidbits/{id}/comments/{cid}": {
+            "get": {
+                "tags": [
+                    "VO"
+                ],
+                "summary": "Find comments by ID",
+                "description": "For administrators to view any user post",
+                "operationId": "getCommentById",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "description": "ID of post that needs to be fetched",
+                        "required": true,
+                        "type": "string",
+                        "format": "id"
+                    },
+                    {
+                        "in": "path",
+                        "name": "cid",
+                        "description": "ID of post that needs to be fetched",
+                        "required": true,
+                        "type": "string",
+                        "format": "id"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/Comment"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
             },
             "put": {
                 "tags": [
@@ -311,7 +457,23 @@
                 ],
                 "parameters": [
                     {
-                        "name": "comment",
+                        "in": "path",
+                        "name": "id",
+                        "description": "ID of post that needs to be fetched",
+                        "required": true,
+                        "type": "string",
+                        "format": "id"
+                    },
+                    {
+                        "in": "path",
+                        "name": "cid",
+                        "description": "ID of post that needs to be fetched",
+                        "required": true,
+                        "type": "string",
+                        "format": "id"
+                    },
+                    {
+                        "name": "data",
                         "in": "body",
                         "description": "The Comment JSON you want to post",
                         "schema": {
@@ -333,7 +495,7 @@
                 }
             }
         },
-        "/profile": {
+        "/profiles": {
             "get": {
                 "tags": [
                     "VO"
@@ -381,7 +543,7 @@
                 "description": "Create a new `profile`\n",
                 "parameters": [
                     {
-                        "name": "profile",
+                        "name": "data",
                         "in": "body",
                         "description": "The Profile JSON you want to post",
                         "schema": {
@@ -398,6 +560,43 @@
                         }
                     }
                 }
+            }
+        },
+        "/profiles/{id}": {
+            "get": {
+                "tags": [
+                    "VO"
+                ],
+                "summary": "Find profiles by ID",
+                "description": "For administrators to view any user profile",
+                "operationId": "getProfileById",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "description": "ID of profile that needs to be fetched",
+                        "required": true,
+                        "type": "string",
+                        "format": "id"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/Profile"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
             },
             "put": {
                 "tags": [
@@ -408,7 +607,15 @@
                 ],
                 "parameters": [
                     {
-                        "name": "profile",
+                        "in": "path",
+                        "name": "id",
+                        "description": "ID of profile that needs to be fetched",
+                        "required": true,
+                        "type": "string",
+                        "format": "id"
+                    },
+                    {
+                        "name": "data",
                         "in": "body",
                         "description": "The Profile JSON you want to post",
                         "schema": {
@@ -450,6 +657,10 @@
                 "ownerId": {
                     "type": "string",
                     "description": "identifier of the person who created this post and can make changes.  Note this will always match the owner of the first tidbit."
+                },
+                "ownerHandle": {
+                    "type": "string",
+                    "description": "Human readable identifier of the person who created this comment and can make changes."
                 }
             }
         },
@@ -485,6 +696,10 @@
                 "ownerId": {
                     "type": "string",
                     "description": "identifier of the person who created this tidbit and can make changes."
+                },
+                "ownerHandle": {
+                    "type": "string",
+                    "description": "Human readable identifier of the person who created this comment and can make changes."
                 }
             }
         },
@@ -516,6 +731,10 @@
                 "ownerId": {
                     "type": "string",
                     "description": "identifier of the person who created this comment and can make changes."
+                },
+                "ownerHandle": {
+                    "type": "string",
+                    "description": "Human readable identifier of the person who created this comment and can make changes."
                 }
             }
         },

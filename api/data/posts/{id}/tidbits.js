@@ -1,16 +1,19 @@
 'use strict';
-var Mockgen = require('../mockgen.js');
+var Mockgen = require('../../mockgen.js');
 /**
- * Operations on /posts/{id}
+ * Operations on /posts/{id}/tidbits
  */
 module.exports = {
     /**
-     * summary: Find posts by ID
-     * description: For administrators to view any user post
-     * parameters: id
+     * summary: 
+     * description: Gets `Tidbit` objects.
+Optional query param of **size** determines
+size of returned array
+
+     * parameters: id, size
      * produces: application/json
      * responses: 200, default
-     * operationId: getPostById
+     * operationId: 
      */
     get: {
         200: function (req, res, callback) {
@@ -19,7 +22,7 @@ module.exports = {
              * Replace this by actual data for the api.
              */
             Mockgen().responses({
-                path: '/posts/{id}',
+                path: '/posts/{id}/tidbits',
                 operation: 'get',
                 response: '200'
             }, callback);
@@ -30,7 +33,7 @@ module.exports = {
              * Replace this by actual data for the api.
              */
             Mockgen().responses({
-                path: '/posts/{id}',
+                path: '/posts/{id}/tidbits',
                 operation: 'get',
                 response: 'default'
             }, callback);
@@ -38,33 +41,23 @@ module.exports = {
     },
     /**
      * summary: 
-     * description: 
+     * description: Create a new `tidbit`
+
      * parameters: id, data
      * produces: application/json
-     * responses: 200, default
+     * responses: 200
      * operationId: 
      */
-    put: {
+    post: {
         200: function (req, res, callback) {
             /**
              * Using mock data generator module.
              * Replace this by actual data for the api.
              */
             Mockgen().responses({
-                path: '/posts/{id}',
-                operation: 'put',
+                path: '/posts/{id}/tidbits',
+                operation: 'post',
                 response: '200'
-            }, callback);
-        },
-        default: function (req, res, callback) {
-            /**
-             * Using mock data generator module.
-             * Replace this by actual data for the api.
-             */
-            Mockgen().responses({
-                path: '/posts/{id}',
-                operation: 'put',
-                response: 'default'
             }, callback);
         }
     }
