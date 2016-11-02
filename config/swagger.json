@@ -543,7 +543,7 @@
                 "description": "Create a new `profile`\n",
                 "parameters": [
                     {
-                        "name": "data",
+                        "name": "profile",
                         "in": "body",
                         "description": "The Profile JSON you want to post",
                         "schema": {
