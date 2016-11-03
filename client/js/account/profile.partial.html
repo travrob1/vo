@@ -6,23 +6,23 @@
         <h4 class="topic-separator">Optional</h4>
         
         <label class="ng-binding">Education level</label>
-        <select ng-model="userProfile[field.member]" class="input-block-level" ng-options="str for str in educationOptions">
+        <select ng-model="profile.education" class="input-block-level" ng-options="str for str in educationOptions">
             <option value="">-Select-</option>
             
         </select>
         
         <label for="militaryBranch" >What branch of the military where you in?</label>
-        <select class="input-block-level" ng-model="militaryBranch">
+        <select class="input-block-level" ng-model="profile.militaryBranch">
             <option value="">-Select-</option>
-            <option value="Air Force">Air Force</option>
-            <option value="Army">Army</option>
-            <option value="Cost Gaurd">Coast Gaurd</option>
-            <option value="Marines">Marines</option>
-            <option value="Navy">Navy</option>
+            <option value="airForce">Air Force</option>
+            <option value="army">Army</option>
+            <option value="coastGaurd">Coast Gaurd</option>
+            <option value="marines">Marines</option>
+            <option value="navy">Navy</option>
         </select>
 
         <label for="militaryRank">What was your rank{{militaryBranch | rankBranch}}?</label>
-        <ui-select ng-model="rank.selected" theme="select2" ng-disabled="disabled">
+        <ui-select ng-model="profile.MilitaryRank" theme="select2" ng-disabled="disabled">
             <ui-select-match placeholder="-Select-"><img id="ui-select-match-photo" ng-src="{{ $select.selected.url }}" />{{$select.selected.rank}}</ui-select-match>
             <ui-select-choices repeat="rank in rank_list | rankFilter: {rank: $select.search, level: $select.search}"">
               <div ng-bind-html="rank.level" style="display: inline"></div>
