@@ -33,7 +33,7 @@
     "s3fs": "^2.5.0",
     "serve-favicon": "~2.3.0",
     "swagger-mongoose": "^1.1.2",
-    "swaggerize-express": "^4.0.5",
+    "swaggerize-express": "git@github.com:tongfa/swaggerize-express.git",
     "swagmock": "~0.0.2",
     "ui-select": "^0.19.6",
     "uuid": "^2.0.3"
