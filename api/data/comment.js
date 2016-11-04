@@ -52,7 +52,7 @@ size of returned array
      * operationId: 
      */
     post: {
-        200: Mongeese.verbPost(Comment)
+        200: Mongeese.post(Comment)
     },
     /**
      * summary: 

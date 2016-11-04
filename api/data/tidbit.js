@@ -52,7 +52,7 @@ size of returned array
      * operationId: 
      */
     post: {
-        200: Mongeese.verbPost(Tidbit)
+        200: Mongeese.post(Tidbit)
     },
     /**
      * summary: 

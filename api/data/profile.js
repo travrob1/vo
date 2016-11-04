@@ -19,7 +19,7 @@ size of returned array
      * operationId: 
      */
     get: {
-        200: Mongeese.verbGetById(Profile),
+        200: Mongeese.getById(Profile),
         unUsed: function (req, res, callback) {
             /**
              * Using mock data generator module.
@@ -42,7 +42,7 @@ size of returned array
      * operationId: 
      */
     post: {
-        200: Mongeese.verbPost(Profile)
+        200: Mongeese.post(Profile)
     },
     /**
      * summary: 

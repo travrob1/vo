@@ -16,7 +16,7 @@ module.exports = {
      * operationId: getPetById
      */
     get: {
-        200: Mongeese.verbGetById(Post),
+        200: Mongeese.getById(Post),
         400: function (req, res, callback) {
             /**
              * Using mock data generator module.
