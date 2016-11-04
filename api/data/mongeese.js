@@ -1,5 +1,8 @@
 'use strict';
-/*global module */
+/*global require */
+var _ = require('lodash');
+
+/*global module, _ */
 function verbPost(Model) {
     return function (req, res, callback) {
         var instance = new Model(req.body);
@@ -15,11 +18,20 @@ function verbPost(Model) {
 
 function verbPut(Model) {
     return function(req, res, callback){
-        var instance = new Model(req.body);
-        instance.save(function(err) {
-            if (err)
-                throw err;
-            return callback(null, {responses: instance});
+        Model.findById(req.params.id, function (err, model) {
+          if (err) {
+            return callback(err);
+          }
+          
+          _.merge(model, req.body);
+
+          model.save(function (err, updatedModel) {
+            if (err) {
+                return callback(err);
+            }else {
+                return callback(null, {responses: updatedModel});
+            }
+          });
         });
     };
 }
