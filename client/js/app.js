@@ -27,7 +27,7 @@ app.config( function($stateProvider, $urlRouterProvider) {
         }).state('setUsername', {
             url: '/set-username',
             templateUrl: 'js/register/set-username.html',
-            controller: 'registerCtrl'
+            controller: 'accountCtrl'
         }).state('about-us', {
             url: '/about-us',
             templateUrl: 'js/about-us/about-us.html',
