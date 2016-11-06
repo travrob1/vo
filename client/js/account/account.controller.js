@@ -1,5 +1,5 @@
 'use strict';
-/*global angular, $ */
+/*global angular, $, _*/
 angular.module('app').controller('accountCtrl',function($scope, $state, $http, $parse, AuthService, Upload, $timeout, cropPubSub, rankList){
     $scope.connectLocal = undefined;
     function populateUserInfo(u) {
@@ -7,10 +7,19 @@ angular.module('app').controller('accountCtrl',function($scope, $state, $http, $
         $scope.user.email = u.email;
     }
 
+    // $timeout(function () {
+    //     _.set($scope, 'profile.militaryRank.rank', 'First Sergeant');
+    //     _.set($scope, 'profile.militaryBranch', 'airForce');
+    //     _.set($scope, 'profile.education', 'less than highschool');
+    //     var rankIdx = _.findIndex(rankList[$scope.profile.militaryBranch], {rank: $scope.profile.militaryRank.rank});
+    //     $scope.profile.militaryRank.level = rankList[$scope.profile.militaryBranch][rankIdx].level;
+    //     $scope.profile.militaryRank.url = rankList[$scope.profile.militaryBranch][rankIdx].url;
+    //     $scope.$digest();
+    // },500);
+
     $scope.user = {};
     $scope.userPasswords = {};
     $scope.profile = {};
-    $scope.profile.MilitaryRank = '';
 
 
     $scope.photo = $scope.$root.authenticatedUser.photo || '/images/avatar.png';
@@ -18,7 +27,14 @@ angular.module('app').controller('accountCtrl',function($scope, $state, $http, $
     
     $scope.userUpdate = function(){
         AuthService.userUpdate($scope.$root.authenticatedUser).then(function(){
-            //show something
+            var method = $state.current.url === '/set-username' ? 'post': 'put';
+
+            $http[method]('/profiles',{
+                'rank': $scope.profile.militaryRank.rank,
+                'education': $scope.profile.education,
+                'militaryBranch': $scope.profile.militaryBranch,
+                'userId': $scope.authenticatedUser._id
+            });
         });
     };
 
@@ -75,10 +91,12 @@ angular.module('app').controller('accountCtrl',function($scope, $state, $http, $
     $scope.disabled = undefined;
    
 
-    $scope.$watch('profile.militaryBranch', function(val){
+    $scope.$watch('profile.militaryBranch', function(val, oldVal){
         if (val){
             $scope.rank_list = rankList[val];
-            $scope.profile.MilitaryRank = '';
+            if(oldVal){
+                $scope.profile.militaryRank = '';
+            }
 
 
         }else {

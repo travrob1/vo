@@ -4,7 +4,7 @@
 /*global angular, _ */
 angular.module('app')
     .controller('loginRedirectCtrl',function($rootScope, $scope, $state, $location, config, state){
-            if (_.get($rootScope, 'authenticatedUser.created') === _.get($rootScope, 'authenticatedUser.modified')) {
+            if (!_.has($rootScope, 'authenticatedUser.username') || _.get($rootScope, 'authenticatedUser.created') === _.get($rootScope, 'authenticatedUser.modified')) {
                 state.ui.firstTimeLoggedIn = true;
                 $state.transitionTo('setUsername');
             } else if (state.ui.comeBackUrl){
