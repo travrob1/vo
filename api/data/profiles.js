@@ -18,18 +18,7 @@ size of returned array
      * operationId: 
      */
     get: {
-        200: Mongeese.get(Profile),
-        default: function (req, res, callback) {
-            /**
-             * Using mock data generator module.
-             * Replace this by actual data for the api.
-             */
-            Mockgen().responses({
-                path: '/profiles',
-                operation: 'get',
-                response: 'default'
-            }, callback);
-        }
+        200: Mongeese.get(Profile)
     },
     /**
      * summary: 

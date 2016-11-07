@@ -18,19 +18,7 @@ size of returned array
      * operationId: 
      */
     get: {
-        200: Mongeese.get(Post),
-        default: function (req, res, callback) {
-            console.log('posts default');
-            /**
-             * Using mock data generator module.
-             * Replace this by actual data for the api.
-             */
-            Mockgen().responses({
-                path: '/posts',
-                operation: 'get',
-                response: 'default'
-            }, callback);
-        }
+        200: Mongeese.get(Post)
     },
     /**
      * summary: 
