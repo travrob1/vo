@@ -495,44 +495,7 @@
                 }
             }
         },
-        "/profiles": {
-            "get": {
-                "tags": [
-                    "VO"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "description": "Gets `Profile` objects.\nOptional query param of **size** determines\nsize of returned array\n",
-                "parameters": [
-                    {
-                        "name": "size",
-                        "in": "query",
-                        "description": "Size of array",
-                        "required": true,
-                        "type": "number",
-                        "format": "integer"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Successful response",
-                        "schema": {
-                            "title": "ArrayOfProfileStuff",
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/Profile"
-                            }
-                        }
-                    },
-                    "default": {
-                        "description": "Unexpected error",
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }
-                }
-            },
+        "/profile": {
             "post": {
                 "tags": [
                     "VO"
@@ -543,7 +506,7 @@
                 "description": "Create a new `profile`\n",
                 "parameters": [
                     {
-                        "name": "data",
+                        "name": "profile",
                         "in": "body",
                         "description": "The Profile JSON you want to post",
                         "schema": {
@@ -560,28 +523,16 @@
                         }
                     }
                 }
-            }
-        },
-        "/profiles/{id}": {
+            },
             "get": {
                 "tags": [
                     "VO"
                 ],
                 "summary": "Find profiles by ID",
-                "description": "For administrators to view any user profile",
+                "description": "Get a profile by userId",
                 "operationId": "getProfileById",
                 "produces": [
                     "application/json"
-                ],
-                "parameters": [
-                    {
-                        "in": "path",
-                        "name": "id",
-                        "description": "ID of profile that needs to be fetched",
-                        "required": true,
-                        "type": "string",
-                        "format": "id"
-                    }
                 ],
                 "responses": {
                     "200": {
@@ -606,14 +557,6 @@
                     "application/json"
                 ],
                 "parameters": [
-                    {
-                        "in": "path",
-                        "name": "id",
-                        "description": "ID of profile that needs to be fetched",
-                        "required": true,
-                        "type": "string",
-                        "format": "id"
-                    },
                     {
                         "name": "data",
                         "in": "body",

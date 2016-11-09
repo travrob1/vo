@@ -9,18 +9,47 @@ var Profile = require('../../app/models/swagifiedApi.js').Profile;
 module.exports = {
     /**
      * summary: 
-     * description: Gets `Profile` objects.
-Optional query param of **size** determines
-size of returned array
+     * description: Create a new `profile`
 
-     * parameters: size
+     * parameters: profile
      * produces: application/json
-     * responses: 200, default
+     * responses: 200
      * operationId: 
      */
+    post: {
+        200: function (req, res, callback) {
+            /**
+             * Using mock data generator module.
+             * Replace this by actual data for the api.
+             */
+            Mockgen().responses({
+                path: '/profile',
+                operation: 'post',
+                response: '200'
+            }, callback);
+        }
+    },
+    /**
+     * summary: Find profiles by ID
+     * description: Get a profile by userId
+     * parameters: 
+     * produces: application/json
+     * responses: 200, default
+     * operationId: getProfileById
+     */
     get: {
-        200: Mongeese.getById(Profile),
-        unUsed: function (req, res, callback) {
+        200: function (req, res, callback) {
+            /**
+             * Using mock data generator module.
+             * Replace this by actual data for the api.
+             */
+            Mockgen().responses({
+                path: '/profile',
+                operation: 'get',
+                response: '200'
+            }, callback);
+        },
+        default: function (req, res, callback) {
             /**
              * Using mock data generator module.
              * Replace this by actual data for the api.
@@ -34,20 +63,8 @@ size of returned array
     },
     /**
      * summary: 
-     * description: Create a new `profile`
-
-     * parameters: profile
-     * produces: application/json
-     * responses: 200
-     * operationId: 
-     */
-    post: {
-        200: Mongeese.post(Profile)
-    },
-    /**
-     * summary: 
      * description: 
-     * parameters: profile
+     * parameters: data
      * produces: application/json
      * responses: 200, default
      * operationId: 
