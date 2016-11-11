@@ -474,11 +474,15 @@ definitions:
         type: string
         description: When this tidbit was created.
         format: date-time
-      inReferenceToId:
+      inReferenceToCommentId:
         type: string
         description: >-
           the comment this comment pertains to, or none if this is a top level
           comment in reference to the tidbit.
+      tidbitId:
+        type: string
+        description: >-
+          the tidbit this comment pertains to
       ownerId:
         type: string
         description: >-
