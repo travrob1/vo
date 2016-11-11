@@ -34,7 +34,6 @@ angular.module('app').controller('accountCtrl',function($scope, $state, $http, $
     
     $scope.userUpdate = function(){
         AuthService.userUpdate($scope.$root.authenticatedUser).then(function(){
-            debugger
             $http[method]('/profile',{
                 'rank': $scope.profile.militaryRank.rank,
                 'education': $scope.profile.education,

@@ -69,7 +69,6 @@ module.exports = {
                     if (err){
                         return callback(err);
                     } else {
-                        console.log(profile);
                         _.merge(profile, req.body);
                         profile.save(function(err, res){
                             if(err){
