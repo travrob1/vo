@@ -17,6 +17,7 @@ Repo - `https://github.com/krakenjs/swaggerize-express`
 3. download the json and YAML file.
 4. `git checkout swaggerize`
 5. copy the downloaded json and YAML file to ./config/
+6. delete all the files under ./api
 5. `yo swaggerize`, answers are:
 ```
 Swaggerize Generator
