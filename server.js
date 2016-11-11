@@ -2,6 +2,8 @@
 
 // set up ======================================================================
 // get all the tools we need
+global.dirname = __dirname;
+
 var express  = require('express');
 var app      = express();
 var port     = process.env.PORT || 4000;
@@ -22,7 +24,6 @@ var fs = require('fs');
 var _ = require('lodash');
 
 var configDB = require('./config/database.js');
-
 // configuration ===============================================================
 mongoose.connect(configDB.url); // connect to our database
 
