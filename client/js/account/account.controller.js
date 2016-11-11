@@ -2,20 +2,27 @@
 /*global angular, $, _*/
 angular.module('app').controller('accountCtrl',function($scope, $state, $http, $parse, AuthService, Upload, $timeout, cropPubSub, rankList){
     $scope.connectLocal = undefined;
-    function populateUserInfo(u) {
-        $scope.user.name = u.username;
-        $scope.user.email = u.email;
-    }
+    var method;
 
-    // $timeout(function () {
-    //     _.set($scope, 'profile.militaryRank.rank', 'First Sergeant');
-    //     _.set($scope, 'profile.militaryBranch', 'airForce');
-    //     _.set($scope, 'profile.education', 'less than highschool');
-    //     var rankIdx = _.findIndex(rankList[$scope.profile.militaryBranch], {rank: $scope.profile.militaryRank.rank});
-    //     $scope.profile.militaryRank.level = rankList[$scope.profile.militaryBranch][rankIdx].level;
-    //     $scope.profile.militaryRank.url = rankList[$scope.profile.militaryBranch][rankIdx].url;
-    //     $scope.$digest();
-    // },500);
+    $http.get('/profile').then(function (res) {
+        if(res.data){
+            var profile = res.data[0];
+            _.set($scope, 'profile.militaryRank.rank', profile.rank);
+            _.set($scope, 'profile.militaryBranch', profile.militaryBranch);
+            _.set($scope, 'profile.education', profile.education);
+            var rankIdx = _.findIndex(rankList[$scope.profile.militaryBranch], {rank: $scope.profile.militaryRank.rank});
+            $scope.profile.militaryRank.level = rankList[$scope.profile.militaryBranch][rankIdx].level;
+            $scope.profile.militaryRank.url = rankList[$scope.profile.militaryBranch][rankIdx].url;
+            if(!$scope.$$phase){
+                $scope.$digest();
+            }
+
+            method = 'put';
+        }else {
+            method = 'post';
+
+        }
+    });
 
     $scope.user = {};
     $scope.userPasswords = {};
@@ -27,9 +34,8 @@ angular.module('app').controller('accountCtrl',function($scope, $state, $http, $
     
     $scope.userUpdate = function(){
         AuthService.userUpdate($scope.$root.authenticatedUser).then(function(){
-            var method = $state.current.url === '/set-username' ? 'post': 'put';
-
-            $http[method]('/profiles',{
+            debugger
+            $http[method]('/profile',{
                 'rank': $scope.profile.militaryRank.rank,
                 'education': $scope.profile.education,
                 'militaryBranch': $scope.profile.militaryBranch,

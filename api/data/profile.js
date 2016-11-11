@@ -2,6 +2,7 @@
 var Mockgen = require('./mockgen.js');
 var Mongeese = require('./mongeese.js');
 var Profile = require('../../app/models/swagifiedApi.js').Profile;
+var _ = require('lodash');
 
 /**
  * Operations on /profile
@@ -17,17 +18,7 @@ module.exports = {
      * operationId: 
      */
     post: {
-        200: function (req, res, callback) {
-            /**
-             * Using mock data generator module.
-             * Replace this by actual data for the api.
-             */
-            Mockgen().responses({
-                path: '/profile',
-                operation: 'post',
-                response: '200'
-            }, callback);
-        }
+        200: Mongeese.post(Profile)
     },
     /**
      * summary: Find profiles by ID
@@ -39,15 +30,16 @@ module.exports = {
      */
     get: {
         200: function (req, res, callback) {
-            /**
-             * Using mock data generator module.
-             * Replace this by actual data for the api.
-             */
-            Mockgen().responses({
-                path: '/profile',
-                operation: 'get',
-                response: '200'
-            }, callback);
+            if(req.user){
+                var id = req.user._id;
+                Profile.find({userId: id}, function(err, res){
+                    if (err){
+                        return callback(err);
+                    } else {
+                        return callback(null, {responses: res});
+                    }
+                });
+            }
         },
         default: function (req, res, callback) {
             /**
@@ -71,19 +63,25 @@ module.exports = {
      */
     put: {
         200: function (req, res, callback) {
-            /**
-             * Using mock data generator module.
-             * Replace this by actual data for the api.
-             */
-            function fakeCallback(a, b, c) {
-                var r = callback(a, b, c);
-                console.log('params', r, a, b, c);
+            if(req.user){
+                var id = req.user._id;
+                Profile.findOne({userId: id}, function(err, profile){
+                    if (err){
+                        return callback(err);
+                    } else {
+                        console.log(profile);
+                        _.merge(profile, req.body);
+                        profile.save(function(err, res){
+                            if(err){
+                                return err;
+                            }else {
+                            return callback(null, {responses: res});
+
+                            }
+                        });
+                    }
+                });
             }
-            Mockgen().responses({
-                path: '/profile',
-                operation: 'put',
-                response: '200'
-            }, fakeCallback);
         },
         default: function (req, res, callback) {
             /**
