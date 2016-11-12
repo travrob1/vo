@@ -53,6 +53,7 @@ module.exports = {
                    return callback(err);
                } else {
                    _.merge(theComment, req.body);
+                   theComment.updated = new Date();
                    theComment.save(function(err, updatedComment){
                        if(err){
                            return err;

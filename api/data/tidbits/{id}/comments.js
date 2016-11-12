@@ -53,6 +53,8 @@ size of returned array
         200: function (req, res, callback) {
            req.body.tidbitId = req.params.id;
            var instance = new Comment(req.body);
+           instance.created = new Date();
+           instance.updated = new Date();
            instance.save(function(err) {
                if (err) {
                    return callback(err);

@@ -52,6 +52,7 @@ module.exports = {
                    return callback(err);
                } else {
                    _.merge(theTidbit, req.body);
+                   theTidbit.updated = new Date();
                    theTidbit.save(function(err, updatedTidbit){
                        if(err){
                            return err;

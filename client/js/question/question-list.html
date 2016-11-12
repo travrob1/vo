@@ -13,7 +13,7 @@
         <section id="question-list">
             <ul class="faq">
                  <li ng-repeat="post in postsList.slice().reverse()">
-                    <div a ui-sref="question({ id: post.id, })">
+                    <div a ui-sref="question({ id: post._id, })">
                         <span class="number">{{$index}}</span>
                         <div>
                             <h3>{{post.title}}</h3>

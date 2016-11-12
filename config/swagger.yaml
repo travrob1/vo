@@ -17,7 +17,7 @@ paths:
         - name: size
           in: query
           description: Size of array
-          required: true
+          required: false
           type: number
           format: integer
       responses:
@@ -121,7 +121,7 @@ paths:
         - name: size
           in: query
           description: Size of array
-          required: true
+          required: false
           type: number
           format: integer
       responses:
@@ -243,7 +243,7 @@ paths:
         - name: size
           in: query
           description: Size of array
-          required: true
+          required: false
           type: number
           format: integer
       responses:

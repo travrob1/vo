@@ -12,7 +12,6 @@ function questionView($scope, $q, $stateParams, $timeout, postApi, state) {
     };
     var postId = $stateParams.id;
     var authUser = $scope.$root.authenticatedUser;
-
     if(state.ui.postTitle){
         $scope.postTitle = state.ui.postTitle;
     }else {
@@ -32,13 +31,13 @@ function questionView($scope, $q, $stateParams, $timeout, postApi, state) {
         getComments(tidbit);
     }
     function getComments(tidbit){
-        postApi.getComments(tidbit.id)
+        postApi.getComments(tidbit._id)
         .then(function(res){
             if ( ! $scope.commentsByTidbit) {
                 $scope.commentsByTidbit = {};
             }
             var comments = res.data;
-            $scope.commentsByTidbit[tidbit.id] = sortComments(comments);
+            $scope.commentsByTidbit[tidbit._id] = sortComments(comments);
             console.log($scope.commentsByTidbit);
         });
     }
@@ -54,11 +53,11 @@ function questionView($scope, $q, $stateParams, $timeout, postApi, state) {
             c.childCount = 0;
         });
         var otherComments = _.differenceBy(comments, rootComments, function(c) {
-            return c.id;
+            return c._id;
         });
         _.forEach(otherComments, function(c) {
             var parentIndex = _.findIndex(rootComments, function(cr) {
-                    return cr.id === c.inReferenceToCommentId;
+                    return cr._id === c.inReferenceToCommentId;
                 }),
                 parent = rootComments[parentIndex];
             c.indent = parent.indent + 33;
@@ -90,10 +89,10 @@ function questionView($scope, $q, $stateParams, $timeout, postApi, state) {
         if(!authUser){
             saveStateToSession();
         }else {
-            postApi.postComment(tidbit.id, {
+            postApi.postComment(tidbit._id, {
                 'text': $scope.activeComment.text,
                 'inReferenceToCommentId': commentId,
-                'name': authUser.username
+                'ownerHandle': authUser.username
             }).then(function(res) {
                 $scope.activeComment = {
                     id: undefined,
@@ -118,7 +117,7 @@ function questionView($scope, $q, $stateParams, $timeout, postApi, state) {
     };
 
     $scope.replyToComment = function(commentId, e) {
-        $scope.activeComment.id = commentId;
+        $scope.activeComment._id = commentId;
         $timeout(function() {
             e.target.parentNode.parentNode.getElementsByClassName('selectedCommentInput')[0].focus();
         }, 100);
