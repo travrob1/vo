@@ -10,7 +10,7 @@
                                 <img class="avatar inject-me" ng-src="images/sample/avatar-default{{comment.avatarIndx}}.svg" alt="">
                             </div>
                             <div class="media-body">
-                                <strong>Comment by <a href="#">{{comment.name}}</a></strong><br>
+                                <strong>Comment by <a href="#">{{comment.ownerHandle}}</a></strong><br>
                                 <small>{{comment.updated | timeToWords}}</small><br>
                                 <p>{{comment.text}} <span class="comment-reply" ng-click="replyToComment(comment._id, $event)">Reply</span></p>
                                 <div ng-if=" activeComment._id === comment._id">

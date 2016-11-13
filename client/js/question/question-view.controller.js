@@ -38,7 +38,6 @@ function questionView($scope, $q, $stateParams, $timeout, postApi, state) {
             }
             var comments = res.data;
             $scope.commentsByTidbit[tidbit._id] = sortComments(comments);
-            console.log($scope.commentsByTidbit);
         });
     }
     function sortComments(theComments) {

@@ -17,11 +17,11 @@
                 <h1 class="no-margin-top">{{postTitle}}</h1>
 
                 <div class="tidbit" ng-repeat="tidbit in tidbits">
-                    <div class="pull-left" ng-style="{fill: tidbit.fill}">
+                    <div class="pull-left img-wrap" ng-style="{fill: tidbit.fill}">
                         <img class="avatar" src="images/sample/avatar1.jpg" alt="">
                     </div>
                     <div class="media-body">
-                        <strong>Posted by <a href="#">{{tidbit.name}}</a></strong><br>
+                        <strong>Posted by <a href="#">{{tidbit.ownerHandle}}</a></strong><br>
                         <small>{{tidbit.updated | timeToWords}}</small><br>
                     </div>
 
@@ -32,8 +32,6 @@
 
                     <post-answer></post-answer>
 
-        
-              
             </div>
         </div>
     </section>
