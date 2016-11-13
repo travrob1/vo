@@ -17,6 +17,7 @@ function postApi($http) {
 
     };
     function create(questionObj) {
+
         return $http.post('/posts',{
             'title': questionObj.title
             })
@@ -27,7 +28,8 @@ function postApi($http) {
             return $http.post('/posts/'+res.data._id+'/tidbits',{
                 'content': questionObj.details,
                 'ownerHandle': questionObj.username,
-                'ownerPhotoUrl': questionObj.photo
+                'ownerPhotoUrl': questionObj.photo,
+                'ownerId': questionObj._id
             }).then(function(tbRes) {
                 return tbRes;
             });
@@ -42,7 +44,9 @@ function postApi($http) {
         return $http.post('/posts/'+postId+'/tidbits',{
             'content': content,
             'ownerHandle': user.username,
-            'ownerPhotoUrl': user.photo
+            'ownerPhotoUrl': user.photo,
+            'ownerId': user._id
+
         });
     }
 

@@ -92,7 +92,8 @@ function questionView($scope, $q, $stateParams, $timeout, postApi, state) {
                 'text': $scope.activeComment.text,
                 'inReferenceToCommentId': commentId,
                 'ownerHandle': authUser.username,
-                'ownerPhotoUrl': authUser.photo
+                'ownerPhotoUrl': authUser.photo,
+                'ownerId': authUser._id
             }).then(function(res) {
                 $scope.activeComment = {
                     id: undefined,
