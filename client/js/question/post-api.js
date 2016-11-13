@@ -26,7 +26,8 @@ function postApi($http) {
             var theRes = res;
             return $http.post('/posts/'+res.data._id+'/tidbits',{
                 'content': questionObj.details,
-                'ownerHandle': questionObj.username
+                'ownerHandle': questionObj.username,
+                'ownerPhotoUrl': questionObj.photo
             }).then(function(tbRes) {
                 return tbRes;
             });
@@ -37,10 +38,11 @@ function postApi($http) {
         return $http.get('/posts/'+id + '/tidbits');
     }
 
-    function postTidbitsByPostId(postId, content, username){
+    function postTidbitsByPostId(postId, content, user){
         return $http.post('/posts/'+postId+'/tidbits',{
             'content': content,
-            'ownerHandle': username
+            'ownerHandle': user.username,
+            'ownerPhotoUrl': user.photo
         });
     }
 

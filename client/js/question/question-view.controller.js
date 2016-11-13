@@ -91,7 +91,8 @@ function questionView($scope, $q, $stateParams, $timeout, postApi, state) {
             postApi.postComment(tidbit._id, {
                 'text': $scope.activeComment.text,
                 'inReferenceToCommentId': commentId,
-                'ownerHandle': authUser.username
+                'ownerHandle': authUser.username,
+                'ownerPhotoUrl': authUser.photo
             }).then(function(res) {
                 $scope.activeComment = {
                     id: undefined,
@@ -106,7 +107,7 @@ function questionView($scope, $q, $stateParams, $timeout, postApi, state) {
         if(!authUser){
             saveStateToSession();
         }else {
-            postApi.postTidbit(postId, $scope.newTidbit, authUser.username)
+            postApi.postTidbit(postId, $scope.newTidbit, authUser)
                 .then(function(res) {
                     
                 $scope.tidbits.push(res.data);

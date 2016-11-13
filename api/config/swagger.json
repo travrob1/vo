@@ -643,6 +643,10 @@
                 "ownerHandle": {
                     "type": "string",
                     "description": "Human readable identifier of the person who created this comment and can make changes."
+                },
+                "ownerPhotoUrl": {
+                    "type": "string",
+                    "description": "url to user's avatar image"
                 }
             }
         },
@@ -682,6 +686,10 @@
                 "ownerHandle": {
                     "type": "string",
                     "description": "Human readable identifier of the person who created this comment and can make changes."
+                },
+                "ownerPhotoUrl": {
+                    "type": "string",
+                    "description": "url to user's avatar image"
                 }
             }
         },

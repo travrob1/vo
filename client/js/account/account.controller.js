@@ -5,14 +5,17 @@ angular.module('app').controller('accountCtrl',function($scope, $state, $http, $
     var method;
 
     $http.get('/profile').then(function (res) {
-        if(res.data){
+        if(res.data.length){
             var profile = res.data[0];
             _.set($scope, 'profile.militaryRank.rank', profile.rank);
             _.set($scope, 'profile.militaryBranch', profile.militaryBranch);
             _.set($scope, 'profile.education', profile.education);
-            var rankIdx = _.findIndex(rankList[$scope.profile.militaryBranch], {rank: $scope.profile.militaryRank.rank});
-            $scope.profile.militaryRank.level = rankList[$scope.profile.militaryBranch][rankIdx].level;
-            $scope.profile.militaryRank.url = rankList[$scope.profile.militaryBranch][rankIdx].url;
+            if($scope.profile.militaryBranch && $scope.profile.militaryRank.rank){
+                var rankIdx = _.findIndex(rankList[$scope.profile.militaryBranch], {rank: $scope.profile.militaryRank.rank});
+                $scope.profile.militaryRank.level = rankList[$scope.profile.militaryBranch][rankIdx].level;
+                $scope.profile.militaryRank.url = rankList[$scope.profile.militaryBranch][rankIdx].url;
+            }
+            
             if(!$scope.$$phase){
                 $scope.$digest();
             }
@@ -35,10 +38,10 @@ angular.module('app').controller('accountCtrl',function($scope, $state, $http, $
     $scope.userUpdate = function(){
         AuthService.userUpdate($scope.$root.authenticatedUser).then(function(){
             $http[method]('/profile',{
-                'rank': $scope.profile.militaryRank.rank,
-                'education': $scope.profile.education,
-                'militaryBranch': $scope.profile.militaryBranch,
-                'userId': $scope.authenticatedUser._id
+                'rank': _.get($scope,'profile.militaryRank.rank'),
+                'education': _.get($scope,'profile.education'),
+                'militaryBranch': _.get($scope,'profile.militaryBranch'),
+                'userId': _.get($scope,'authenticatedUser._id')
             });
         });
     };

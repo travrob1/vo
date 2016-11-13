@@ -18,7 +18,7 @@
 
                 <div class="tidbit" ng-repeat="tidbit in tidbits">
                     <div class="pull-left img-wrap" ng-style="{fill: tidbit.fill}">
-                        <img class="avatar" src="images/sample/avatar1.jpg" alt="">
+                        <img class="avatar" ng-src="{{tidbit.ownerPhotoUrl || '/images/avatar.png'}}" alt="">
                     </div>
                     <div class="media-body">
                         <strong>Posted by <a href="#">{{tidbit.ownerHandle}}</a></strong><br>
@@ -26,6 +26,7 @@
                     </div>
 
                     <p>{{tidbit.content}}</p>
+                    <hr class="comment-breaker" ng-if="commentsByTidbit[tidbit._id].length">
                     <question-comments tidbitId="{{tidbit.id}}"></question-comments>
 
                 </div>
