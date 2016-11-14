@@ -84,6 +84,29 @@ module.exports = function(app, _) {
                 if(err) {
                     res.status(500).send('User not updated', err);
                 }
+
+                Tidbit.find({ownerId: user._id},function(err, tidbits){
+                    if(err){return console.log(err);}
+                    tidbits.forEach(function(tidbit){
+                        tidbit.ownerPhotoUrl = updatedUser.photo;
+
+                        tidbit.save(function(err){
+                            if(err){return console.log(err);}
+                        });
+                    });
+                });
+
+                Comment.find({ownerId: user._id},function(err, comments){
+                    if(err){return console.log(err);}
+                    comments.forEach(function(comment){
+                        comment.ownerPhotoUrl = updatedUser.photo;
+
+                        comment.save(function(err){
+                            if(err){return console.log(err);}
+                        });
+                    });
+                });
+
                 res.send(updatedUser);
             });
         });
