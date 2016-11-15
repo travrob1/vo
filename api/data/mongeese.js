@@ -6,6 +6,7 @@ var _ = require('lodash');
 function verbPost(Model) {
     return function (req, res, callback) {
         var instance = new Model(req.body);
+        instance.indexed = false;
         instance.save(function(err) {
             if (err) {
                 return callback(err);

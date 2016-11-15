@@ -55,6 +55,7 @@ size of returned array
            var instance = new Comment(req.body);
            instance.created = new Date();
            instance.updated = new Date();
+           instance.indexed = false;
            instance.save(function(err) {
                if (err) {
                    return callback(err);
