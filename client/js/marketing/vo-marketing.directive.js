@@ -13,6 +13,8 @@ angular.module('app').directive('voMarketing', function($window){
                     $('#hero').insertBefore('#search-section');
                 }
             };
+
+            $window.onresize();
         }
     };
 }); 
