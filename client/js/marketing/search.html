@@ -1,0 +1,20 @@
+<form class="search-form clearfix">
+    <input id="search" type="search" placeholder="Search our community for answers" ng-model="searchInput">
+    <input id="search-btn" class="btn btn-primary" type="submit" ng-click="search()" value="Search">
+</form>
+
+<div class="search-results-container" ng-style="{height: searchHeight}"> 
+<br>
+    <ul class="faq">
+         <li ng-repeat="item in foo">
+            <div >
+                <span class="number">{{$index}}</span>
+                <div>
+                    <h3>{{item.title}}</h3>
+                    <p>{{item.content}}</p>
+                </div>
+             <div>
+        </li>
+
+    </ul>
+</div>

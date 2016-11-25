@@ -1,5 +1,8 @@
 'use strict';
 var Mockgen = require('../../../mockgen.js');
+var Tidbit = require(dirname + '/app/models/swagifiedApi.js').Tidbit;
+var _ = require('lodash');
+
 /**
  * Operations on /posts/{id}/tidbits/{tid}
  */
@@ -14,15 +17,13 @@ module.exports = {
      */
     get: {
         200: function (req, res, callback) {
-            /**
-             * Using mock data generator module.
-             * Replace this by actual data for the api.
-             */
-            Mockgen().responses({
-                path: '/posts/{id}/tidbits/{tid}',
-                operation: 'get',
-                response: '200'
-            }, callback);
+           Tidbit.findOne({postId: req.params.id, _id: req.params.tid},function(err, theTidbit){
+               if (err){
+                   return callback(err);
+               } else {
+                   return callback(null, {responses: theTidbit});
+               }
+           });
         },
         default: function (req, res, callback) {
             /**
@@ -46,15 +47,21 @@ module.exports = {
      */
     put: {
         200: function (req, res, callback) {
-            /**
-             * Using mock data generator module.
-             * Replace this by actual data for the api.
-             */
-            Mockgen().responses({
-                path: '/posts/{id}/tidbits/{tid}',
-                operation: 'put',
-                response: '200'
-            }, callback);
+           Tidbit.findOne({postId: req.params.id, _id: req.params.tid},function(err, theTidbit){
+               if (err){
+                   return callback(err);
+               } else {
+                   _.merge(theTidbit, req.body);
+                   theTidbit.updated = new Date();
+                   theTidbit.save(function(err, updatedTidbit){
+                       if(err){
+                           return err;
+                       }else {
+                            return callback(null, {responses: updatedTidbit});
+                       }
+                   });
+               }
+           });
         },
         default: function (req, res, callback) {
             /**

@@ -2,6 +2,8 @@
 
 // set up ======================================================================
 // get all the tools we need
+global.dirname = __dirname;
+
 var express  = require('express');
 var app      = express();
 var port     = process.env.PORT || 4000;
@@ -22,17 +24,6 @@ var fs = require('fs');
 var _ = require('lodash');
 
 var configDB = require('./config/database.js');
-
-app.use('/swagger-ui', express.static('api/swagger-ui-2.2.6/dist'));
-app.get('/config/swagger.json', function(req, res) { res.sendFile(__dirname + '/config/swagger.json'); });
-
-var Swaggerize = require('swaggerize-express');
-
-app.use(Swaggerize({
-    api: path.resolve('./api/config/swagger.json'),
-    handlers: path.resolve('./api/handlers')
-}));
-
 // configuration ===============================================================
 mongoose.connect(configDB.url); // connect to our database
 
@@ -74,6 +65,19 @@ app.use(express.static(path.join(__dirname, '/.build')));
 // routes ======================================================================
 require('./app/auth-routes.js')(app, passport, _); // load our routes and pass in our app and fully configured passport
 require('./app/app-routes.js')(app, _); 
+
+
+// API ======================================================================
+app.use('/swagger-ui', express.static('api/swagger-ui-2.2.6/dist'));
+app.get('/config/swagger.json', function(req, res) { res.sendFile(__dirname + '/config/swagger.json'); });
+
+var Swaggerize = require('swaggerize-express');
+Swaggerize.expressParentAppRemoveViewSettings();
+
+app.use(Swaggerize({
+    api: path.resolve('./api/config/swagger.json'),
+    handlers: path.resolve('./api/handlers')
+}));
 
 // launch ======================================================================
 app.listen(port);

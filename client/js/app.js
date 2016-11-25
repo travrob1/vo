@@ -27,7 +27,7 @@ app.config( function($stateProvider, $urlRouterProvider) {
         }).state('setUsername', {
             url: '/set-username',
             templateUrl: 'js/register/set-username.html',
-            controller: 'registerCtrl'
+            controller: 'accountCtrl'
         }).state('about-us', {
             url: '/about-us',
             templateUrl: 'js/about-us/about-us.html',
@@ -104,6 +104,8 @@ app.config( function($stateProvider, $urlRouterProvider) {
 }) 
 .run(function($rootScope, $state, $timeout, AuthService) {
     $rootScope.$on('$stateChangeStart', function(event, next) {
+        $('.navbar-collapse').collapse('hide');
+
         $('html body').scrollTop( 0 );
         // redirect to login page if not logged in
         if (next.authenticate && !$rootScope.authenticatedUser) {
@@ -146,9 +148,6 @@ app.controller('globalCtrl', function($scope, $location, $http, AuthService, sta
             .then(function(){
                 $location.path('/');
             });
-    };
-    $scope.mobileCollapseNav = function(){
-        $('.navbar-collapse').collapse('hide');
     };
     $scope.registerFromModal = function(){
         $('.modal').modal('hide');

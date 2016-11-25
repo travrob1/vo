@@ -8,6 +8,9 @@ var s3Impl = new s3('mogaxi', {
 
 var multiparty = require('connect-multiparty');
 var multipartyMiddleware = multiparty();
+var Tidbit = require(dirname + '/app/models/swagifiedApi.js').Tidbit;
+var Comment = require(dirname + '/app/models/swagifiedApi.js').Comment;
+
 
 module.exports = function(app, _) {
     app.use(multipartyMiddleware);
@@ -25,13 +28,44 @@ module.exports = function(app, _) {
 
     app.post('/user-update',function (req, res) {
         var user = req.user;
-        
+        var shouldUpdateExistingRecoredsWithNewName = false;
+        if(user.username !== req.body.user.username){
+            shouldUpdateExistingRecoredsWithNewName = true;
+        }
         _.merge(user, req.body.user);
         user.save(function (err, updatedUser) {
             if (err) {
                 res.status(500).send('User not updated', err);
             }
+            if (shouldUpdateExistingRecoredsWithNewName) {
+                Tidbit.find({ownerId: user._id},function(err, tidbits){
+                    if(err){return console.log(err);}
+                    tidbits.forEach(function(tidbit){
+                        tidbit.ownerHandle = updatedUser.username;
+
+                        tidbit.save(function(err){
+                            if(err){return console.log(err);}
+                        });
+                    });
+                });
+
+                Comment.find({ownerId: user._id},function(err, comments){
+                    if(err){return console.log(err);}
+                    comments.forEach(function(comment){
+                        comment.ownerHandle = updatedUser.username;
+
+                        comment.save(function(err){
+                            if(err){return console.log(err);}
+                        });
+                    });
+                });
+
+
+            }
+
             res.send(updatedUser);
+
+
         });
     });
 
@@ -50,6 +84,29 @@ module.exports = function(app, _) {
                 if(err) {
                     res.status(500).send('User not updated', err);
                 }
+
+                Tidbit.find({ownerId: user._id},function(err, tidbits){
+                    if(err){return console.log(err);}
+                    tidbits.forEach(function(tidbit){
+                        tidbit.ownerPhotoUrl = updatedUser.photo;
+
+                        tidbit.save(function(err){
+                            if(err){return console.log(err);}
+                        });
+                    });
+                });
+
+                Comment.find({ownerId: user._id},function(err, comments){
+                    if(err){return console.log(err);}
+                    comments.forEach(function(comment){
+                        comment.ownerPhotoUrl = updatedUser.photo;
+
+                        comment.save(function(err){
+                            if(err){return console.log(err);}
+                        });
+                    });
+                });
+
                 res.send(updatedUser);
             });
         });

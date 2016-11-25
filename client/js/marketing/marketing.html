@@ -1,7 +1,5 @@
-   
-
-<section id="hero">
-
+<vo-marketing></vo-marketing>
+<section id="hero" ng-class="{collapsed: hideHero}">
 
      <div class="container">
         <div class="row">
@@ -15,7 +13,7 @@
                     Ask pertinant questions
                 </div>
                 <div class="col-xs-4 bullet">
-                    <i class="fa fa-ambulance icon-large"></i>
+                    <i class="fa fa-comments-o icon-large"></i>
                     Answer and provide feedback
                 </div>
                 <div class="col-xs-4 bullet">
@@ -29,14 +27,9 @@
 </section>
 
 
-
-
-<section class="services">
+<section id="search-section" class="services">
     <div class="container">
-    <form>
-        <input id="search" type="search" placeholder="Search our community for answers">
-        <input id="search-btn" class="btn btn-primary" type="submit" value="Search">
-    </form>
+    <vo-search></vo-search>
 
     </div>
 </section>

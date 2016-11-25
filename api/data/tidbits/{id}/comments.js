@@ -1,5 +1,7 @@
 'use strict';
 var Mockgen = require('../../mockgen.js');
+var Comment = require(dirname + '/app/models/swagifiedApi.js').Comment;
+
 /**
  * Operations on /tidbits/{id}/comments
  */
@@ -17,15 +19,14 @@ size of returned array
      */
     get: {
         200: function (req, res, callback) {
-            /**
-             * Using mock data generator module.
-             * Replace this by actual data for the api.
-             */
-            Mockgen().responses({
-                path: '/tidbits/{id}/comments',
-                operation: 'get',
-                response: '200'
-            }, callback);
+
+          Comment.find({tidbitId: req.params.id},function(err, res){
+              if (err){
+                  return callback(err);
+              } else {
+                  return callback(null, {responses: res});
+              }
+          });
         },
         default: function (req, res, callback) {
             /**
@@ -50,15 +51,18 @@ size of returned array
      */
     post: {
         200: function (req, res, callback) {
-            /**
-             * Using mock data generator module.
-             * Replace this by actual data for the api.
-             */
-            Mockgen().responses({
-                path: '/tidbits/{id}/comments',
-                operation: 'post',
-                response: '200'
-            }, callback);
+           req.body.tidbitId = req.params.id;
+           var instance = new Comment(req.body);
+           instance.created = new Date();
+           instance.updated = new Date();
+           instance.indexed = false;
+           instance.save(function(err) {
+               if (err) {
+                   return callback(err);
+               } else {
+                   return callback(null, {responses: instance});
+               }
+           });
         }
     }
 };

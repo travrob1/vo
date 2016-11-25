@@ -17,45 +17,51 @@ function postApi($http) {
 
     };
     function create(questionObj) {
-        return $http.post('/api/Posts',{
+
+        return $http.post('/posts',{
             'title': questionObj.title
             })
         .then(sendTidbit);
 
         function sendTidbit(res) {
             var theRes = res;
-            return $http.post('/api/Posts/'+res.data.id+'/Tidbit',{
+            return $http.post('/posts/'+res.data._id+'/tidbits',{
                 'content': questionObj.details,
-                'name': questionObj.username
+                'ownerHandle': questionObj.username,
+                'ownerPhotoUrl': questionObj.photo,
+                'ownerId': questionObj._id
             }).then(function(tbRes) {
-                return _.merge(theRes, tbRes);
+                return tbRes;
             });
         }
     }
 
     function findTidbitsByPostId(id){
-        return $http.get('/api/Posts/'+id + '/Tidbit');
+        return $http.get('/posts/'+id + '/tidbits');
     }
 
-    function postTidbitsByPostId(postId, content, username){
-        return $http.post('/api/Posts/'+postId+'/Tidbit',{
+    function postTidbitsByPostId(postId, content, user){
+        return $http.post('/posts/'+postId+'/tidbits',{
             'content': content,
-            'name': username
+            'ownerHandle': user.username,
+            'ownerPhotoUrl': user.photo,
+            'ownerId': user._id
+
         });
     }
 
     function getComments(tidbitId){
-        return $http.get('/api/Tidbits/' +tidbitId+ '/Comments');
+        return $http.get('/tidbits/' +tidbitId+ '/comments');
     }
 
     function postComment(tidbitId, data){
-        return $http.post('/api/Tidbits/' +tidbitId+ '/Comments', data);
+        return $http.post('/tidbits/' +tidbitId+ '/comments', data);
     }
 
     function getPosts(){
-        return $http.get('/api/Posts/');
+        return $http.get('/posts');
     } 
     function getPostById(id){
-        return $http.get('/api/Posts/'+ id);
+        return $http.get('/posts/'+ id);
     }
 }

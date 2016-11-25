@@ -1,6 +1,9 @@
 /*global angular */
 angular.module('app').filter('rankFilter', function() {
   return function(items, props) {
+    if(!items){
+      return;
+    }
     var out = [];
 
     if (angular.isArray(items)) {

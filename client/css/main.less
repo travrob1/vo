@@ -40,13 +40,26 @@
     -moz-box-sizing: border-box;
     box-sizing: border-box
 }
+html,
+body {
+    font-size: 16px;
+
+    @media screen and (max-width: 1199px){
+        font-size: 14px;
+    } 
+
+    @media screen and (max-width: 991px){
+        font-size: 13px;
+    } 
+
+
+}
 body {
     padding-top: 90px;
-    font-size: 16px;
     color: #34495e;
     background: #f5f5f5;
     @media screen and (max-width: 767px){
-        padding-top: 50px;
+        padding-top: 0;
     }
 }
 body h1,
@@ -70,6 +83,14 @@ h4.topic-separator {
     border-bottom: 1px solid #dadada; 
     margin-bottom: 8px; 
     padding-bottom: 10px;
+}
+
+h1 {
+    font-size: 2.25rem;
+}
+
+h3 {
+    font-size: 1.5rem;
 }
 
 .btn {
@@ -150,7 +171,7 @@ a:focus,
 //header tags and button tags
 @media screen and (max-width: 767px){
     h1 {
-        font-size: 1.9em;
+        font-size: 1.9rem;
     }
 }
 body #ng-view section {
@@ -160,11 +181,19 @@ body #ng-view section {
     }
 }
 body #ng-view > section#hero {
-    height: auto;
+    max-height: 420px;
     padding: 20px 0;
     background-color: #fff;
     font-weight: 100;
     color:#272727;
+    transition: height 1s, padding 1s, max-height 1s;
+    overflow: hidden;
+
+
+    &.collapsed {
+        max-height: 0;
+        padding: 0;
+    }
 
     h1 {
         margin-top:10px;
@@ -198,7 +227,8 @@ body #ng-view > section#hero {
     }
     @media screen and (max-width: 480px){
         h1 {
-            line-height: 32px;
+            line-height: 26px;
+            font-size: 1.6rem;
         }
     }
 }
@@ -439,6 +469,16 @@ header .navbar li.dropdown a {
     }
 }
 
+@media screen and (max-width: 767px){
+    .navbar-fixed-top {
+        position: relative;
+        .navbar {
+            margin-bottom: 0;
+        }
+    }
+
+}
+
 
 @media screen and (max-width: 991px) and (min-width: 768px){
     .nav > li > a {
@@ -490,6 +530,9 @@ header .navbar li.dropdown a {
     
     #form-login {
         position: relative;
+        .btn-primary {
+            height: 50px;
+        }
     }
 
     .modal-header {
@@ -997,34 +1040,39 @@ ul.gallery li .preview:hover .links {
     -o-transform: translate(0, 0);
     transform: translate(0, 0)
 }
+
+
 ul.faq {
     list-style: none;
     margin: 0;
     padding-left: 0;
+    li {
+        margin-top: 30px;
+        cursor: pointer;
+        &:first-child {
+            margin-top: 0
+        }
+
+        span.number {
+            display: block;
+            float: left;
+            width: 50px;
+            height: 50px;
+            line-height: 50px;
+            text-align: center;
+            background: #2dcc70;
+            color: #fff;
+            font-size: 24px;
+            margin-right: 15px;
+        }
+
+        & > div h3 {
+            margin-top: 0
+        }
+    }
 }
-ul.faq li {
-    margin-top: 30px
-}
-ul.faq li:first-child {
-    margin-top: 0
-}
-ul.faq li span.number {
-    display: block;
-    float: left;
-    width: 50px;
-    height: 50px;
-    line-height: 50px;
-    text-align: center;
-    background: #2dcc70;
-    color: #fff;
-    font-size: 24px
-}
-ul.faq li>div {
-    margin-left: 0;
-}
-ul.faq li>div h3 {
-    margin-top: 0
-}
+
+
 #error {
     text-align: center;
     margin-top: 150px;
@@ -1051,12 +1099,18 @@ ul.faq li>div h3 {
         background-color: #000;
     }
     span {
-        font-size: 1em;
+        font-size: 1rem;
         top: 1px;
         background: #F5F5F5;
         position: relative;
-        padding: .25em .75em 0;
+        padding: .25rem .75rem 0;
         -webkit-box-sizing: border-box;
+    }
+
+    @media screen and (max-width: 480px){
+        span {
+            font-size: 0.7rem
+        }
     }
 }
 
@@ -1075,7 +1129,11 @@ ul.faq li>div h3 {
     display: block;
     margin: 0 auto;
 }
+
 // MARKETING PAGE
+.search-form {
+    position: relative;
+}
 #search {
     width: 85%;
     height: 116px;
@@ -1084,7 +1142,7 @@ ul.faq li>div h3 {
     border-top-right-radius: 0;
     border-color: #2dcc70;
     resize: none;
-    font-size: 50px;
+    font-size: 3.125rem;
     &::-webkit-input-placeholder { /* Chrome/Opera/Safari */
       color: #E3E3E3;
     }
@@ -1108,7 +1166,59 @@ ul.faq li>div h3 {
     border-bottom-right-radius: 4px;
     text-align: center;
     padding: 29px 0;
-    font-size:44px;
+    font-size: 2.75rem;
+}
+
+@media screen and (max-width: 1199px){
+    #search {
+        width: 80%;
+        font-size: 40px;
+    }
+    #search-btn {
+        width: 20%;
+        font-size: 40px;
+    }
+} 
+
+@media screen and (max-width: 991px){
+    #search {
+        height: 86px;
+        font-size: 33px;
+    }
+    #search-btn {
+        font-size: 33px;
+        height: 86px;
+        padding: 20.9px 0;
+    }
+} 
+
+@media screen and (max-width: 767px){
+    #search {
+        height: 56px;
+        font-size: 20px;
+    }
+    #search-btn {
+        height: 56px;
+        padding: 0;
+        font-size: 20px;
+    }
+} 
+
+@media screen and (max-width: 480px){
+    #search {
+        font-size: 15px;
+    }
+    #search-btn {
+        padding: 0;
+        font-size: 15px;
+    }
+} 
+
+
+.search-results-container {
+    height: 0;
+    overflow: hidden;
+    transition: height 1s;
 }
 
 
@@ -1188,6 +1298,13 @@ img.avatar-nav {
     width: 40px;
 }
 
+.tidbit .img-wrap {
+    margin-right: 7px;
+    img {
+        width:70px;
+    }
+}
+
 
 // QUESTION VIEW Pages
 
@@ -1197,6 +1314,10 @@ img.avatar-nav {
     background-color: #e6e6e6;
     padding: 15px;
     
+    .comment-breaker {
+        border-top: 1px solid #2dcc70;
+        margin-bottom: 12px;
+    }
     textarea{
         width: 90%;
         height: 176px;
@@ -1254,10 +1375,8 @@ img.avatar-nav {
 .parent-comment {
     padding: 10px;
     
-    img,
-    svg {
-        width: 64px;
-        height: 64px;
+    img {
+        width: 60px;
         margin-right: 7px;
     }
 }
@@ -1266,18 +1385,14 @@ img.avatar-nav {
     padding: 10px;
 }
 .child-comment-one{
-    img,
-    svg {
+    img{
         width:40px;
-        height:40px;
         margin-right: 7px;
     }
 }
 .child-comment-plus-one{
-    img,
-    svg {
+    img {
         width:20px;
-        height:20px;
         margin-right: 7px;
     }
 }
@@ -1306,8 +1421,4 @@ section#ask-question {
     #question-submit-answer-btn {
         display: none;
     }
-}
-
-section#question-list .number {
-    margin-right: 15px;
 }

@@ -20,3 +20,4 @@ npm-debug.log
 .build
 .tmp-integration-data/
 client/css/main.css
+vo.pem

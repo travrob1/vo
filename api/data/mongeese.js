@@ -1,8 +1,12 @@
 'use strict';
+/*global require */
+var _ = require('lodash');
 
+/*global module, _ */
 function verbPost(Model) {
     return function (req, res, callback) {
         var instance = new Model(req.body);
+        instance.indexed = false;
         instance.save(function(err) {
             if (err) {
                 return callback(err);
@@ -14,12 +18,23 @@ function verbPost(Model) {
 }
 
 function verbPut(Model) {
-    var instance = new Model(req.body);
-    instance.save(function(err) {
-        if (err)
-            throw err;
-        return callback(null, {responses: instance});
-    });
+    return function(req, res, callback){
+        Model.findById(req.params.id, function (err, model) {
+          if (err) {
+            return callback(err);
+          }
+          
+          _.merge(model, req.body);
+
+          model.save(function (err, updatedModel) {
+            if (err) {
+                return callback(err);
+            }else {
+                return callback(null, {responses: updatedModel});
+            }
+          });
+        });
+    };
 }
 
 
@@ -43,10 +58,27 @@ function verbGetById(Model) {
                 return callback(null, {responses: existingInstance});
             }
         });
-    }
+    };
+}
+
+function verbGet(Model){
+    return function(req, res, callback){
+        Model.find(function(err, res){
+            if (err){
+                return callback(err);
+            } else {
+                return callback(null, {responses: res});
+            }
+        });
+    };
 }
 
 module.exports = {
-    verbPost: verbPost,
-    verbGetById: verbGetById,
-}
+    post: verbPost,
+    put: verbPut,
+    get: verbGet,
+    getById: verbGetById,
+    getCount: verbGetCount,
+
+
+};
