@@ -24,12 +24,22 @@ var fs = require('fs');
 var _ = require('lodash');
 
 var configDB = require('./config/database.js');
+
+// setup swaggerize-express and delete view related expresss options
+//  which kill our rendering engine.
+var Swaggerize = require('swaggerize-express');
+delete Swaggerize.defaultExpressOptions.views;
+delete Swaggerize.defaultExpressOptions['view cache'];
+delete Swaggerize.defaultExpressOptions['view engine'];
+
 // configuration ===============================================================
 mongoose.connect(configDB.url); // connect to our database
 
 require('./config/passport')(passport); // pass passport for configuration
 
-
+// setup swagger-ui
+app.use('/swagger-ui', express.static('api/swagger-ui-2.2.6/dist'));
+app.get('/config/swagger.json', function(req, res) { res.sendFile(__dirname + '/config/swagger.json'); });
 
 // set up our express application
 app.use(logger('dev')); // log every request to the console
@@ -68,12 +78,6 @@ require('./app/app-routes.js')(app, _);
 
 
 // API ======================================================================
-app.use('/swagger-ui', express.static('api/swagger-ui-2.2.6/dist'));
-app.get('/config/swagger.json', function(req, res) { res.sendFile(__dirname + '/config/swagger.json'); });
-
-var Swaggerize = require('swaggerize-express');
-Swaggerize.expressParentAppRemoveViewSettings();
-
 app.use(Swaggerize({
     api: path.resolve('./api/config/swagger.json'),
     handlers: path.resolve('./api/handlers')
