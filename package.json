@@ -2,6 +2,7 @@
   "name": "node-authentication",
   "main": "server.js",
   "dependencies": {
+    "angular-sanitize": "^1.5.9",
     "bcrypt-nodejs": "latest",
     "body-parser": "^1.15.2",
     "connect-flash": "~0.1.1",
