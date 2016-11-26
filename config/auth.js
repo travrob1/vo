@@ -18,8 +18,8 @@ module.exports = {
 	},
 
 	'googleAuth' : {
-		'clientID' 		: '174222772059-sfg2577ht7hgnd63q12d6hpc1994lhim.apps.googleusercontent.com',
-		'clientSecret' 	: 'G1To4veAB-q8N5VUhDe6zFJ3',
+		'clientID' 		: '1067698620369-vfov9nirm80s2v8lqqe6ftvkfnbak3vc.apps.googleusercontent.com',
+		'clientSecret' 	: 'y1Y3Bw5wZTvJq_Sbd0p65Pbs',
 		'callbackURL' 	: '/auth/google/callback'
 	}
 
