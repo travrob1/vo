@@ -3,12 +3,19 @@ var LocalStrategy    = require('passport-local').Strategy;
 var FacebookStrategy = require('passport-facebook').Strategy;
 var TwitterStrategy  = require('passport-twitter').Strategy;
 var GoogleStrategy   = require('passport-google-oauth').OAuth2Strategy;
+var _ = require('lodash');
 
 // load up the user model
 var User       = require('../app/models/user');
 
 // load the auth variables
 var configAuth = require('./auth'); // use this one for testing
+
+var callbackEnvPrefix = process.env.NODE_ENV === 'development' ? 'http://localhost:4000': 'http://vo.mogaxi.com';
+_.forOwn(configAuth, function(value, key) {
+    value.callbackURL = callbackEnvPrefix + value.callbackURL;
+});
+
 
 module.exports = function(passport) {
 
